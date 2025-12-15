@@ -1,1 +1,9 @@
 
+common-doubts:
+ to view the currect versions of any package 
+ npm view @angular/core
+
+copilot cmd to upgrade :
+cd aangular_20; node -v; npx -p @angular/cli@20 ng update @angular/core@20 @angular/cli@20
+=============================================================================================================
+
