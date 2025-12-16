@@ -1317,3 +1317,6 @@ Harder lazy loading
 Unnecessary module dependencies
 
 “We migrated from NgModules to standalone components to reduce boilerplate, simplify architecture, and improve lazy loading.”
+
+===================================================================================
+fromEvent needs a real  DOM element right, so in rxjs -> fromEvent - its an observable operator for dom event will be placed inside ngAfterviewInit
