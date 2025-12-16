@@ -1,0 +1,91 @@
+NPX:
+	npx downloads packages but does NOT install them
+	The files exist, but they are:
+	Not registered in package.json
+	Not added to PATH
+	Not considered part of your project or system
+	So it is execution, not installation.
+
+example:
+	when we do -> npx ng serve:
+	
+	🔍 Look for ng in:
+		node_modules/.bin ✅ - if local project has this 
+
+		global npm bin ✅ - or in global node module - > C:\Users\<user>\AppData\Roaming\npm\node_modules
+
+	❌ If not found → download package
+
+	📦 Store it in: 	npm-cache/_npx/
+
+	▶️ Execute it
+
+	♻️ Keep cache for reuse (temporary)
+
+npm -y , npx -p 
+
+“The -y flag in npm stands for --yes and automatically accepts default values or confirmations, commonly used with npm init -y for quick non-interactive project initialization.”
+
+Easy memory trick
+
+-y → Yes, continue
+
+-p → Package
+
+-g → Global
+
+
+1. What npx does (and what it does NOT)
+
+	When you run:
+
+	npx ng new state
+
+	npx responsibility ✅
+
+	Finds or downloads Angular CLI (from cache or temp)
+
+	Executes the ng command
+
+	That’s it ✅
+
+	⚠️ npx has NO idea what ng new will do.
+
+2️. What ng new state does (important)
+
+	Once Angular CLI starts, npx is out of the picture.
+
+	Angular CLI (ng new) is designed to:
+
+	Create project structure ✅
+
+	Generate package.json ✅
+
+	Install dependencies ✅
+
+	Create node_modules ✅
+
+	This behavior is hardcoded inside Angular CLI.
+
+	So:
+
+	It’s not npx installing dependencies — it’s Angular CLI itself.
+
+3️. Why node_modules is created locally
+
+	Because ng new internally runs:
+
+	npm install
+
+
+	(or pnpm / yarn if configured)
+
+	Which causes:
+
+	state/
+	 ├─ package.json
+	 ├─ package-lock.json
+	 └─ node_modules/   ✅
+
+
+	This is project setup, not CLI setup.

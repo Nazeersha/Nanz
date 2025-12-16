@@ -1,0 +1,46 @@
+✅ Short Answer (Important)
+
+👉 NO, newly added or updated packages in package.json
+👉 Will NOT be ignored in production IF done correctly
+
+BUT ⚠️
+👉 CI/CD using lock file (npm ci) will FAIL
+👉 if package.json and package-lock.json are not in sync
+
+🧠 Core Rule (You MUST remember this)
+
+package.json = what you want
+package-lock.json = what you freeze for production
+
+CI/CD never invents dependencies.
+It only installs what is already locked.
+
+🔥 What exactly happens in CI/CD (npm ci)
+Scenario 1️⃣ – Correct flow (✅ BEST PRACTICE)
+Step 1: Developer adds a package
+npm install lodash
+
+
+What happens:
+
+✅ package.json → updated
+
+✅ package-lock.json → updated
+
+Step 2: Commit BOTH files
+git add package.json package-lock.json
+git commit -m "Added lodash"
+
+Step 3: CI/CD runs
+npm ci
+
+
+✅ Result:
+
+Installs newly added package
+
+Uses exact locked version
+
+Build succeeds
+
+✔ Nothing is ignored

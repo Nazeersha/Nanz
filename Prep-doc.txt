@@ -1,0 +1,59 @@
+I am working as a senior UI/ Angular developer
+
+My reponsibility includes:
+Requirement analysis , and converting them into UI solution
+Implementing the reusable angular components using standalone components
+and also managing the state using rxjs, ngrx services.
+and API integrations
+and ofcource , optimizing the performance using lazy loading, change detections, code splitting
+leading code review , and sometime mentoring the junior 
+and also participating scrum activities - planning, estimations.
+
+so overall like end to end from requirememt analysis and development to deployment.
+
+======================================================================================================================
+What are the latest features you implemented in your project?
+
+Angular upgrade 13 to 18
+Migrated project to standalone components
+Implemented Signals for local component state
+
+Used Control Flow syntax (@if, @for, @switch) to simplify templates
+
+Implemented route-based code-splitting using standalone lazy routes
+
+Used RxJS improvements like firstValueFrom / lastValueFrom in some cases
+
+Implemented SSR (Server-Side Rendering) using Angular Universal
+
+Used image optimization and hydration to improve performance
+==============================================================================================================================
+Do you communicate with business? How are story points estimated?
+Yes — I communicate with Business Analysts / Product Owners regarding:
+
+Requirements clarification
+
+UI workflow explanation
+
+Feasibility discussion
+
+Timeline update
+
+Demo presentations
+
+How story points are estimated?
+
+Using Agile practices like:
+
+✔ Planning Poker
+✔ Fibonacci series (1, 2, 3, 5, 8, 13)
+✔ Complexity
+✔ Effort
+✔ Risks
+✔ Dependencies
+
+Short answer:
+
+“We estimate story points based on complexity and effort using Fibonacci scale during sprint planning.”
+
+==============================================================================================================================

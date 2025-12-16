@@ -1,0 +1,6 @@
+NGRX:
+its a state management library for angular 
+	NgRx is a framework designed specifically for building reactive applications in Angular and is not a general-purpose library for other frameworks like React or Vue. Its libraries are deeply integrated with Angular's ecosystem, including its dependency injection system, RxJS, and the Angular Router.
+
+	it help to remember and manage the data across the component in structured and predictable way
+
