@@ -37,6 +37,10 @@ a    → undefined
 b    → <uninitialized>  (TDZ)
 foo  → function reference
 
+JavaScript hoisting means that before code execution starts, JavaScript creates memory for variable and function declarations.
+During this memory creation phase, function declarations are fully initialized, var variables are initialized with undefined, and let/const are hoisted but left uninitialized.
+After memory creation, the code is executed line by line.
+
 =============================================================================================================================
 
 Parsing:
@@ -122,6 +126,7 @@ inner → outer → global
 
 
 This is called the scope chain.
+===========================================scope chain======================================================================================================================
 How the Scope Chain Works:
 When the JavaScript engine tries to access a variable:
 Current Scope First: It starts by searching for the variable in the current (innermost) scope.
@@ -205,3 +210,17 @@ Macrotask Queue	Task Queue	setTimeout, setInterval, DOM events
 Microtask Queue	Job Queue	Promise.then, queueMicrotask, MutationObserver
 ⚠️ Microtasks always run before macrotasks
 =================================================================================================================================================================================
+
+Phase 2:
+Now JS starts executing your code from top to bottom.
+ JS scans code
+2️⃣ Creates memory
+   - var → undefined
+   - function → full body
+   - let/const → uninitialized (TDZ)
+3️⃣ Executes code line by line
+🎯 INTERVIEW PERFECT ONE-LINER
+Hoisting is JavaScript’s behavior of allocating memory for declarations before execution.
+var is initialized with undefined, function declarations are fully initialized, and let/const are hoisted but remain in the temporal dead zone until execution reaches their declaration.
+
+==============================================================================================================================================================================
