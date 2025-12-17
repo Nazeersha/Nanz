@@ -1,1 +1,76 @@
+if any js file loaded / or any script is loaded in browser immediatly V8 engine (javascript engine will take control on this)
+
+When V8 receives JavaScript code, it works in two main phases:
+1. Compilation phase (Memory Creation Phase)
+2. Execution phase (Code Execution Phase)
+=================================================================================================================================
+Phase 1: Compilation (Memory Creation)
+before executing the code , the engine will do below actions
+🔹 Step 1: Parsing
+    V8 reads the code
+    Converts it into tokens
+    Builds an Abstract Syntax Tree (AST)
+  Ex:
+  var a = 10;
+  function foo() {}
+  V8 understands:
+  var → variable declaration
+  function → function declaration
+
+🔹 Step 2: Creating Execution Context - Memory Creation
+📦 Memory is allocated for:
+  Ex: var a	-> Memory created, value = undefined
+  function foo()	-> Memory created, full function stored
+  let / const	-> Memory created but kept uninitialized
+
+This is what we call hoisting.
+✅ Nothing is moved physically to the top
+❌ This is a misconception
+It’s just memory setup
+
+🔹 Visual memory state after phase 1
+var a = 10;
+let b = 20;
+function foo() {}
+Memory looks like:
+a    → undefined
+b    → <uninitialized>  (TDZ)
+foo  → function reference
+
+=============================================================================================================================
+
+Parsing:
+Parsing = converting raw JavaScript text into a structure the engine can understand
+Your code is just text:
+var a = 10;
+function foo() {
+  console.log(a);
+}
+V8 cannot execute text directly.
+So it converts it into three things:
+Text → Tokens → AST (Abstract Syntax Tree)
+2️⃣ Step 1.1 – Tokenization (Lexical Analysis)
+V8 reads your code character by character.
+Example:
+var a = 10;
+
+V8 breaks it into tokens:
+Code	Token Type
+var	  Keyword
+a	    Identifier
+=	    Assignment Operator
+10	  Numeric Literal
+;	    Statement End
+
+So internally it becomes something like:
+KEYWORD(var)
+IDENTIFIER(a)
+OPERATOR(=)
+NUMBER(10)
+⚠️ At this stage:
+No memory
+No execution
+Only understanding grammar
+======================================================================================================================================
+Lexical means -> Lexical is nothing but its a position where the code is written -> bases on the position the scope will be decided
 
