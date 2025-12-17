@@ -74,3 +74,57 @@ Only understanding grammar
 ======================================================================================================================================
 Lexical means -> Lexical is nothing but its a position where the code is written -> bases on the position the scope will be decided
 
+Lexical Environment -> stores the variable and thiere scope relationship
+
+Lexical Analysis - is not but its a hoisting  , where scope of the variable and function will be analyzed and decided in thiew lexical environment - function lexical env will be created when the function is called 
+
+The scope chain : is nothing but the structure to check the variables accessibility in nested scopes.
+Lexical Environment
+ ├── Environment Record (variables)
+ └── Reference to Outer Lexical Environment
+
+Global Lexical Environment
+Example:
+let a = 10;
+function foo() {}
+
+Global Lexical Environment
+ ├── a → 10
+ ├── foo → function
+ └── outer → null
+
+5️⃣ Function Lexical Environment
+When a function is called, a new Lexical Environment is created.
+function outer() {
+  let x = 10;
+  function inner() {
+    console.log(x);
+  }
+  inner();
+}
+outer();
+
+When outer() runs:
+Outer Lexical Environment
+ ├── x → 10
+ └── outer → Global Lexical Environment
+
+When inner() runs:
+Inner Lexical Environment
+ ├── (no x here)
+ └── outer → Outer Lexical Environment
+
+So lookup happens like this:
+inner → outer → global
+
+
+This is called the scope chain.
+How the Scope Chain Works:
+When the JavaScript engine tries to access a variable:
+Current Scope First: It starts by searching for the variable in the current (innermost) scope.
+Move Up the Chain: If the variable is not found in the current scope, the engine moves up to the immediate outer (parent) scope and continues the search.
+Continue to Global Scope: This process continues, traversing the chain of outer scopes, until it reaches the global scope, which is the outermost scope.
+ReferenceError: If the variable is not found anywhere in the entire scope chain, a ReferenceError is thrown. 
+
+=================================================================================================================================================================================
+
