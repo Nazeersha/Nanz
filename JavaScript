@@ -72,11 +72,14 @@ No memory
 No execution
 Only understanding grammar
 ======================================================================================================================================
+var - functional or gloabal scope, so stored in variable environment / but let and const having block scope so they are gettign store in lexical environment 
+
 Lexical means -> Lexical is nothing but its a position where the code is written -> bases on the position the scope will be decided
 
 Lexical Environment -> stores the variable and thiere scope relationship
 
-Lexical Analysis - is not but its a hoisting  , where scope of the variable and function will be analyzed and decided in thiew lexical environment - function lexical env will be created when the function is called 
+Lexical Analysis - is not but its a hoisting  , where scope of the variable and function will be analyzed and decided in thiew lexical environment - 
+function lexical env will be created when the function is called 
 
 The scope chain : is nothing but the structure to check the variables accessibility in nested scopes.
 Lexical Environment
@@ -127,4 +130,78 @@ Continue to Global Scope: This process continues, traversing the chain of outer 
 ReferenceError: If the variable is not found anywhere in the entire scope chain, a ReferenceError is thrown. 
 
 =================================================================================================================================================================================
+Why let and const use Lexical Environment
+Now your earlier doubt connects perfectly 👇
+console.log(a); // ❌ ReferenceError
+let a = 10;
 
+What happens?
+During memory creation:
+a is placed in the Lexical Environment
+But it is uninitialized
+This region is called:
+Temporal Dead Zone (TDZ)
+Access before initialization = ❌ error
+
+Feature 	                        var	                                                                    let and const
+Scope	                            Function/Global scope	                                                Block scope ({})
+Hoisting	                        Hoisted and initialized with undefined	                                Hoisted but remain uninitialized (in the TDZ)
+Accessibility  before declaration	Accessible (value is undefined)	                                        Not accessible (throws ReferenceError)
+Memory Management	                Stored in the VariableEnvironment portion of the Execution Context	    Stored in the LexicalEnvironment portion; a new one created for each block scope
+
+================================================================================================================================================================================
+Closure:
+A closure is a function along with a reference to its lexical environment.
+When an inner function is returned and assigned to a variable, that variable holds the function, 
+and the function retains access to the lexical variables of its parent scope,
+even after the parent function has finished execution.
+
+function outer() {
+  let x = 10;
+  return function inner() {
+    console.log(x);
+  };
+}
+
+const fn = outer();
+fn();
+What actually happens:
+sql
+Copy code
+fn ──▶ inner function
+          │
+          ▼
+   [[Environment]] ──▶ Outer Lexical Environment (x = 10)
+✔ fn does NOT store the environment
+✔ inner function stores it internally ([[Environment]])
+
+A closure keeps variables alive by retaining a reference to its lexical environment.
+Memory is released when the function becomes unreachable.
+Improper use of closures—especially with event listeners or subscriptions—can cause memory leaks.
+
+===============================================================================================================================================================================
+Garbage collection happens automatically in JavaScript. Unlike low-level languages such as C or C++ where developers must manually allocate and free memory, 
+JavaScript engines handle memory management behind the scenes. 
+
+How Automatic Garbage Collection Works
+The process is managed by a background process called the garbage collector, which primarily uses the mark-and-sweep algorithm. 
+
+Mark Phase: 
+    The garbage collector starts from "roots" (like global variables and variables in the current function scope) and traces all objects that are reachable or 
+    accessible by the program, marking them as "in use".
+Sweep Phase: 
+    The collector then scans all of memory and reclaims the space occupied by any unmarked objects, which are considered no longer needed. 
+    Modern JavaScript engines, such as V8 (used in Chrome and Node.js), use further optimizations like generational garbage collection, which categorizes 
+    objects by age to improve efficiency, but the core principle of automatic management remains the same. 
+================================================================================================================================================================================
+Event Loop (very short refresher):
+JavaScript has:
+Call Stack → runs synchronous code
+Task Queues → async callbacks wait here
+Event Loop → decides what runs next
+There are two main queues:
+Queue	Also called	Examples
+Macrotask Queue	Task Queue	setTimeout, setInterval, DOM events
+Microtask Queue	Job Queue	Promise.then, queueMicrotask, MutationObserver
+⚠️ Microtasks always run before macrotasks
+=================================================================================================================================================================================
