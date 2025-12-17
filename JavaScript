@@ -221,6 +221,92 @@ Now JS starts executing your code from top to bottom.
 3️⃣ Executes code line by line
 🎯 INTERVIEW PERFECT ONE-LINER
 Hoisting is JavaScript’s behavior of allocating memory for declarations before execution.
-var is initialized with undefined, function declarations are fully initialized, and let/const are hoisted but remain in the temporal dead zone until execution reaches their declaration.
+var is initialized with undefined, function declarations are fully initialized, and let/const are hoisted but remain
+in the temporal dead zone until execution reaches their declaration.
 
 ==============================================================================================================================================================================
+JavaScript errors inside functions are checked only when that function is executed, not when it is defined.
+
+This is called:
+
+👉 Lazy execution
+
+JavaScript execution has 3 major steps
+1️⃣ Parsing (Syntax check)
+2️⃣ Compilation / Memory creation (Hoisting)
+3️⃣ Execution
+
+2️⃣ Step 1: Parsing (Syntax checking)
+
+The engine checks only:
+
+❌ Missing brackets {
+
+❌ Missing parentheses ()
+
+❌ Invalid keywords
+
+❌ Invalid grammar
+
+How try...catch works (simple)
+try {
+  consol.log("hi");
+} catch (e) {
+  console.log(e.name);    // ReferenceError
+  console.log(e.message);
+}
+
+
+✔ Only catches runtime errors
+❌ Cannot catch syntax errors
+
+Error type	    When detected	    Example
+Syntax Error	Parsing	missing     }
+Reference Error	Execution	        wrong variable name
+Type Error	    Execution	        calling non-function
+
+if (true {
+  console.log("hi");
+}
+❌ Missing ) - syntax error 
+
+2. ReferenceError
+
+When? Runtime
+Meaning? Variable does not exist in scope
+
+console.log(x);
+
+
+3. TypeError
+
+When? Runtime
+Meaning? Wrong operation on a value type
+
+let num = 5;
+num(); // ❌ calling number as function
+
+==========================================================================================================================================
+V8 Engine:
+
+when js load V8 control starts, but its not ignition of that engine, engine has some component , so v8 Parser will be doing the initial operations
+when bytecode generation start , ignition will appear, all executions will happen in ignition pipeline.
+
+Who does tokenization, parsing, AST creation?
+
+👉 V8 itself does it
+But not Ignition
+
+Inside V8 there are multiple internal components:
+Stage	                V8 Component
+Tokenization (Lexing)	V8 Parser
+Parsing	                V8 Parser
+AST creation	        V8 Parser
+Bytecode generation	    V8 (via Ignition pipeline)
+Execution	            Ignition (Interpreter)
+Optimization	        TurboFan (JIT Compiler)
+
+💡 Ignition does NOT parse
+Ignition only executes bytecode
+
+=======================================================================================================================================
