@@ -1,8 +1,10 @@
 ======================================RXjs Notes========================
-RXjs -  Reactive extenstion of Javascript. its an reactive library to manage the state.
+RXjs -  Reactive extenstion of Javascript. 
+        its an reactive library to manage the state (simple state).
         so it used to handle the asynchronous data streams (data that arrives over time) using 
         Observables and operators.
-        When we create an Observable and subscribe to it, the Observable pushes values to the subscriber whenever new data is emitted.     
+        When we create an Observable and subscribe to it, the Observable pushes values to the subscriber whenever new data is emitted.
+        main 3 concept: observable -> operator -> subscriber
 
         RxJS itself does not handle DOM updates or change detection.
         In Angular, when an Observable emits a value, Angular’s change detection may run (via Zone.js or async pipe) and update the DOM.
@@ -20,6 +22,71 @@ setInterval(() => {
 Reactive: 
 dataObservable.subscribe(data => { console.log() }
 
+===================================================================================================
+RxJS alone → data flow
+RxJS + BehaviorSubject → simple state
+
+this below example has issue:
+const obser = new Observable(observer => { console.log('Observable executor running'); });
+obser.subscribe((val) => { console.log('Observable emitted value:', val); }); 
+obser.subscribe((val) => { console.log('Observable emitted value:', val); }); 
+obser.next('first value'); obser.next('second value');
+
+bcz observable does not have the next method, obsever or subject having next method.
+
+so if we are creating observable , inside subscript , next method should be there to emit value.
+=====================================================================================================
+
+Promises start executing immediately when they are created.
+They cannot be cancelled and they resolve only once.
+Calling .then() multiple times does not re-execute the Promise; it only reads the same resolved value.
+
+Observables start executing only when a subscription happens.
+Each subscription starts a new execution (unicast by default).
+Observables can emit multiple values over time and can be unsubscribed, which stops execution.
+
+Compared to a normal function, an Observable supports cancellation, asynchronous streams, and powerful operators for transforming data.
+
+in this code  , we can understand how the multiple value emited, for single subscribe
+
+ const obser = new Observable((observer) => {
+      console.log('Observable executor running');
+      for (let i = 0; i < 3; i++) {
+        observer.next(i);
+      }
+    });
+
+    obser.subscribe((va) => {
+      console.log('from obervable', va);
+    });
+
+    const prm = new Promise((resolver) => {
+      console.log('promise started');
+      for (let j = 0; j < 3; j++) {
+        resolver(j);
+      }
+    });
+
+    prm.then((val) => console.log('from promise', val));
+
+Output:
+Observable executor running
+from obervable 0
+from obervable 1
+from obervable 2
+promise started
+from promise 0
+
+| Feature                      | Promise     | Observable        |
+| ---------------------------- | ----------- | ----------------- |
+| When execution starts        | On creation | On subscribe      |
+| How many times producer runs | Once        | Per subscription  |
+| Values                       | One         | Many              |
+| Over time                    | ❌           | ✅                 |
+| Cancel                       | ❌           | ✅ (`unsubscribe`) |
+| Operators                    | ❌           | ✅                 |
+| Lazy execution               | ❌           | ✅                 |
+=================================================================================================================================
 
 
 
