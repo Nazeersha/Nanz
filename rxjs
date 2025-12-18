@@ -126,7 +126,6 @@ Key rules of Subject
 ✔ Emits values only to current subscribers
 ❌ Does NOT replay old values
 ❌ Late subscribers miss previous emissions
-
 ====================================================================================================================================================
 EX: why last subscriber miss value:
 Code example (step-by-step)
@@ -157,7 +156,16 @@ When you call next(value):
 It immediately pushes the value to currently subscribed observers
 If no one is listening → value is lost forever
 
-=======================================================================================================================================
+Subject does not have memory.
+It only emits values to active subscribers, so late subscribers miss previously emitted values.
 
+7️⃣ When should you use Subject?
+✔ Button clicks
+✔ Events (mouse, keyboard)
+✔ Notifications
+✔ Real-time streams where past data doesn’t matter
+❌ App state
+❌ Shared data that new components need immediately
+=======================================================================================================================================
 
 
