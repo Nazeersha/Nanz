@@ -93,6 +93,7 @@ Scenario:
 Observable alone ❌:
 // You cannot call next() from outside
 
+=================================================subject==========================================
 Subject solves this
 const subject = new Subject<number>();
 Subject is:
@@ -167,5 +168,21 @@ It only emits values to active subscribers, so late subscribers miss previously 
 ❌ App state
 ❌ Shared data that new components need immediately
 =======================================================================================================================================
+Behaviour subject:
+
+BehaviorSubject ⭐ (MOST USED)
+const bs = new BehaviorSubject(0);
+Has initial value
+New subscriber immediately gets latest value
+Perfect for state
+
+ReplaySubject
+
+const rs = new ReplaySubject(2);
+Replays last n values for newly subscribed , it is like subject, when we push value, if any subscription already there it will emit to that , 
+but one diff here, for the newly subribed subject will get n number of past values.
+Useful for caching
+
+
 
 
