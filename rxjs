@@ -1,15 +1,29 @@
 ======================================RXjs Notes========================
-RXjs -  Reactive extenstion of Javascript. its an reactive library to manage the state / data that arrives overtime by using its operators.
+RXjs -  Reactive extenstion of Javascript. its an reactive library to manage the state.
+        so it used to handle the asynchronous data streams (data that arrives over time) using 
+        Observables and operators.
+        When we create an Observable and subscribe to it, the Observable pushes values to the subscriber whenever new data is emitted.     
+
+        RxJS itself does not handle DOM updates or change detection.
+        In Angular, when an Observable emits a value, Angular’s change detection may run (via Zone.js or async pipe) and update the DOM.
 
 Reactive - Respond when somethign happened / if any dynamic value comes reactive occordingly
+
 Non - Reactive - You ask again and again " Has somethign is changed " Ex: open wats app - No msg , Open again and see - no msg
 Reacive exaplme here is - watas app notification - once received , open app and see msg.
 
-Non-reactive: setInterval(() => { 
+Non-reactive:
+setInterval(() => { 
   if(dataAvailable) { console.log("data") }
 },1000)
 
-Reactive: dataObservable.subscribe(data => { console.log() }
+Reactive: 
+dataObservable.subscribe(data => { console.log() }
+
+
+
+
+
 
 
 
