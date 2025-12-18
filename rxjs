@@ -35,7 +35,11 @@ obser.next('first value'); obser.next('second value');
 bcz observable does not have the next method, obsever or subject having next method.
 
 so if we are creating observable , inside subscript , next method should be there to emit value.
-=====================================================================================================
+==============================================Observable=======================================================
+An Observable is a lazy data stream that can emit multiple values over time, and allows consumers to subscribe and unsubscribe to control execution.
+
+Observable is the base type in RxJS. Subject and its variants (BehaviorSubject, ReplaySubject, AsyncSubject) are specialized types of Observables
+provided by RxJS.
 
 Promises start executing immediately when they are created.
 They cannot be cancelled and they resolve only once.
@@ -211,6 +215,15 @@ B: 2
 No emission until complete()
 Only last value is emitted
 All subscribers receive it at completion time
+
+What each one really is (one-liners)
+Type	                What it is
+Observable	        Base stream, lazy, unicast
+Subject	                Multicast Observable + Observer
+BehaviorSubject	        Subject with current value
+ReplaySubject	        Subject with value buffer
+AsyncSubject	        Subject that emits final value on completion
+
 ========================================================================================================================================
 
 
