@@ -183,6 +183,36 @@ Replays last n values for newly subscribed , it is like subject, when we push va
 but one diff here, for the newly subribed subject will get n number of past values.
 Useful for caching
 
+AsyncSubject
+AsyncSubject emits the last value ONLY when the stream completes,, completeMethod is needed here, only then it will give last value to thiere subscribers
+whereas ReplaySubject(1) emits the last value immediately, even before completion.
+
+This single line is the key.
+2️⃣ Side-by-side behavior table
+Feature	                                AsyncSubject	                 ReplaySubject(1)
+Emits last value	                ✅	                        ✅
+Emits before completion                	❌	                        ✅
+Requires complete()	                ✅	                        ❌
+Late subscribers get value	        Only after completion	        Always
+Typical use	                        “Give final result only”	“Cache latest value”
+
+3️⃣ Example 1 — AsyncSubject
+const as = new AsyncSubject<number>();
+as.subscribe(v => console.log('A:', v));
+as.next(1);
+as.next(2);
+as.subscribe(v => console.log('B:', v));
+as.complete();
+Output
+A: 2
+B: 2
+
+🔴 Important:
+No emission until complete()
+Only last value is emitted
+All subscribers receive it at completion time
+========================================================================================================================================
+
 
 
 
