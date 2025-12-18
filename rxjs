@@ -87,9 +87,47 @@ from promise 0
 | Operators                    | ❌           | ✅                 |
 | Lazy execution               | ❌           | ✅                 |
 =================================================================================================================================
+Problem Observables couldn’t solve alone
+Scenario:
+“I want to manually push values and share them with many subscribers”
+Observable alone ❌:
+// You cannot call next() from outside
 
+Subject solves this
+const subject = new Subject<number>();
+Subject is:
+Observable (can subscribe) + 
+Observer (has next())
+📌 Acts like an event emitter
+Example
+const subject = new Subject<number>();
 
+subject.subscribe(v => console.log('A', v));
+subject.subscribe(v => console.log('B', v));
 
+subject.next(1);
+subject.next(2);
+
+Output:
+A 1
+B 1
+A 2
+B 2
+
+What is a Subject (in one line)
+
+👉 Subject = Observable + Observer
+You can emit values using next()
+You can subscribe to it like an Observable
+It does NOT store any value
+
+Key rules of Subject
+✔ No initial value
+✔ Emits values only to current subscribers
+❌ Does NOT replay old values
+❌ Late subscribers miss previous emissions
+
+====================================================================================================================================================
 
 
 
