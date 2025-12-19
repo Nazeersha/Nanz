@@ -370,3 +370,41 @@ Object.entries vs map
 https://chatgpt.com/c/69456115-81e4-8324-9175-185897d2fc5e
 
 ===========================================================================================================================================================
+trackBy – WHY it matters (VERY IMPORTANT)
+Problem without trackBy
+<div *ngFor="let user of users">
+  {{ user.name }}
+</div>
+When users changes:
+Angular destroys all DOM nodes
+Recreates everything again ❌
+Bad for performance (especially large lists)
+
+Example
+users = [
+  { id: 1, name: 'A' },
+  { id: 2, name: 'B' }
+];
+// later
+this.users = [...this.users, { id: 3, name: 'C' }];
+
+Even though only 1 item added:
+➡ Angular re-renders A, B, C
+Solution: trackBy
+<div *ngFor="let user of users; trackBy: trackById">
+  {{ user.name }}
+</div>
+trackById(index: number, user: any) {
+  return user.id;
+}
+What Angular does now:
+Compares id
+Reuses existing DOM nodes
+Creates DOM only for new item ✅
+📌 Real-time usage:
+Tables
+Chat messages
+Infinite scroll
+Large lists (1000+ items)
+======================================================================================================================================
+
