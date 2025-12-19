@@ -225,7 +225,50 @@ ReplaySubject	        Subject with value buffer
 AsyncSubject	        Subject that emits final value on completion
 
 ========================================================================================================================================
+Cold Observable (default in RxJS)
+Definition (simple)
+
+A cold observable starts producing values only when you subscribe,
+and each subscriber gets its own execution.
+
+Hot Observable
+Definition (simple)
+A hot observable has one shared source,
+and subscribers tap into it mid-stream.
+
+Cold observables create data per subscriber, hot observables share a single data source among all subscribers.
+
+| Type            | Source             | Shared? | Memory         |
+| --------------- | ------------------ | ------- | -------------- |
+| Cold            | Inside Observable  | ❌       | Per subscriber |
+| Hot             | External / Subject | ✔       | Shared         |
+| BehaviorSubject | Subject            | ✔       | Last value     |
+| ReplaySubject   | Subject            | ✔       | Buffer         |
 
 
+=========================================================================================================================================================
+Angular + async pipe (best memory management)
+{{ data$ | async }}
 
+Angular:
+Subscribes automatically
+Unsubscribes on destroy
+Prevents memory leaks
 
+=========================================================================================================================================================
+What does teardown mean?
+Teardown = cleanup logic
+Code that runs when a subscription is finished or cancelled
+
+Does component destroy automatically clean observables?
+⚠️ NO — this is the biggest misunderstanding
+Angular destroys:
+Component instance
+Template
+View
+❌ Angular does NOT automatically unsubscribe RxJS subscriptions
+(except async pipe)
+
+Teardown is cleanup logic that releases resources when a subscription ends; Angular component destroy does not automatically unsubscribe, so manual unsubscribe is needed to avoid memory leaks.
+
+=====================================================================================================================================================================
