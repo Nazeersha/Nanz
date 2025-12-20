@@ -1107,4 +1107,11 @@ nums.forEach(n => console.log(n));
 | Iterate   | forEach                 |
 
 =========================================Async calls/buildin/closure/prototype/promise/async-await=======================
+  Prototype:
+    What is prototype (in simple words)    
+    Prototype is a shared object from which other objects inherit properties and methods.    
+    Instead of copying methods into every object, JavaScript links objects together.    
+    Think like this:    
+    Objects don’t copy methods — they point to them.
+
 
