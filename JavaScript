@@ -1106,5 +1106,5 @@ nums.forEach(n => console.log(n));
 | Safe Copy | slice, spread           |
 | Iterate   | forEach                 |
 
-======================================================Async calls/ build build method======================================================
+=========================================Async calls/buildin/closure/prototype/promise/async-await=======================
 
