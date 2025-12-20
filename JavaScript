@@ -829,6 +829,101 @@ Example 5: Spread Operator (Immutable way)
     ✔ Creates new object
     ✔ Original object safe
 
+======================================================SHallow copy/deep copy/ seel & Freeze=========================================
+Shallow Copy (Most Confusing Topic)
+    What is Shallow Copy?
+    A new object is created, but nested objects still share the same reference.
+    Example
+    let user = {
+      name: "Nazeer",
+      address: {
+        city: "Chennai"
+      }
+    };
+    let copyUser = { ...user }; // shallow copy
+    Memory
+    user ──▶ Heap Object
+              ├─ name: "Nazeer"
+              └─ address ──▶ { city: "Chennai" }
+    
+    copyUser ─┘
+    
+    Modify Nested Object
+    copyUser.address.city = "Bangalore";
+    console.log(user.address.city); // "Bangalore" 😱
+    ❗ Problem:
+    address is shared
+    Both objects point to same nested object
+    
+    | Method            | Type   |
+    | ----------------- | ------ |
+    | `{ ...obj }`      | Object |
+    | `Object.assign()` | Object |
+    | `[...arr]`        | Array  |
+    | `Array.slice()`   | Array  |
+
+Deep Copy (Correct & Safe Way):
+    What is Deep Copy?
+    New object
+    New nested objects
+    No shared references
+    
+    Example using structuredClone() ✅ (BEST)
+    let deepUser = structuredClone(user);
+    deepUser.address.city = "Hyderabad";
+    
+    console.log(user.address.city); // "Chennai"
+    
+    ✔ Fully independent
+    ✔ Recommended in modern JS
+    
+    Other Deep Copy Methods
+    🔸 JSON Method (Old but common)
+    let deepCopy = JSON.parse(JSON.stringify(user));
+    
+    ❌ Loses:
+    functions
+    undefined
+    Date, Map, Set
+
+Seal vs Freeze (Object Protection)
+    🔒 Object.seal()
+    What it does
+    ✔ Cannot add new properties
+    ✔ Cannot delete properties
+    ❌ Can modify existing values
+    Example
+    let car = { brand: "BMW", price: 50 };
+    
+    Object.seal(car);
+    car.price = 60;       // ✅ allowed
+    car.color = "Black"; // ❌ not allowed
+    delete car.brand;    // ❌ not allowed
+    
+    ❄ Object.freeze()
+    What it does
+    ✔ Cannot add
+    ✔ Cannot delete
+    ✔ Cannot modify
+    Example
+    let bike = { brand: "Yamaha", price: 20 };
+    
+    Object.freeze(bike);
+    bike.price = 25;     // ❌ ignored
+    bike.color = "Red"; // ❌ ignored
+    
+    ⚠ Important: Freeze is Shallow!
+    let user = {
+      name: "Nazeer",
+      address: { city: "Chennai" }
+    };
+    Object.freeze(user);
+    user.address.city = "Delhi"; // 😱 allowed
+    
+    ✔ Top-level frozen
+    ❌ Nested object still mutable
+    👉 To fully freeze → deep freeze
+
 ========================================================Array Method======================================================================
 
 ======================================================Async calls/ build build method======================================================
