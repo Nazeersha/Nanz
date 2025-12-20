@@ -762,8 +762,74 @@ Description 	slice()             Example	Result	        substring()             
 Negative Start	str.slice(-7)	    "Morning"	            str.substring(-7)	    "Good Morning" (treated as 0)
 Start > End	    str.slice(9, 5)	     "" (empty string)	    str.substring(9, 5)	    "Morn" (arguments swapped to 5, 9)
 
-=====================================================Array and object Method==============================================================
+The includes() :
+    method in JavaScript is a built-in function used to determine whether an array or a string contains a specified value or substring, respectively. It is a case-sensitive method that returns a boolean value (true or false). 
+    How to Use includes()
+    The method takes one required parameter (the value to search for) and one optional parameter (the position to start the search from). 
+    For Arrays
+    The Array.prototype.includes() method checks if an array contains a specific element. 
+    Syntax: arr.includes(searchElement, fromIndex)
+    searchElement: The value to search for.
+    fromIndex (Optional): The index at which to start searching (defaults to 0). Negative indices count from the end of the array. 
+    
+    const pets = ["cat", "dog", "bat"];
+    console.log(pets.includes("cat")); // Output: true
+    console.log(pets.includes("at")); // Output: false (checks for whole elements)
+    console.log(pets.includes("dog", 1)); // Output: true
+    console.log(pets.includes("cat", 1)); // Output: false (search starts from index 1)
+    
+    The String.prototype.includes() method checks if one string can be found within another. 
+    Syntax: str.includes(searchString, position)
+    searchString: The substring to search for.
+    position (Optional): The position within the string at which to begin searching (defaults to 0). 
+    const sentence = "The quick brown fox jumps over the lazy dog.";
+    
+    console.log(sentence.includes("fox")); // Output: true
+    console.log(sentence.includes("Fox")); // Output: false (case sensitive)
+    console.log(sentence.includes("lazy", 30)); // Output: true (search starts at index 30)
 
+=====================================================object Method==============================================================
+Object Methods (Real Objects in Heap)
+Objects are non-primitive, stored in heap memory.
+let user = {
+  name: "Nazeer",
+  age: 25
+};
+user (reference) → stack
+Actual object → heap
+
+Example 1: Object.keys()
+    Object.keys(user);
+    Steps
+    JS scans object properties
+    Collects keys
+    Returns array
+    ["name", "age"]
+
+Example 2: Object.values()
+    Object.values(user);
+    ["Nazeer", 25]
+
+Example 3: Object.entries() (Angular keyvalue pipe uses this)
+    Object.entries(user);
+    [
+      ["name", "Nazeer"],
+      ["age", 25]
+    ]
+    💡 Used when iterating objects (like *ngFor)
+
+Example 4: Object.assign() (Mutation example)
+    let target = {};
+    Object.assign(target, user);
+    console.log(target);
+    ❗ target is modified
+
+Example 5: Spread Operator (Immutable way)
+    let newUser = { ...user, age: 26 };
+    ✔ Creates new object
+    ✔ Original object safe
+
+========================================================Array Method======================================================================
 
 ======================================================Async calls/ build build method======================================================
 
