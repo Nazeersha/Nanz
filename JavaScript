@@ -925,6 +925,85 @@ Seal vs Freeze (Object Protection)
     👉 To fully freeze → deep freeze
 
 ========================================================Array Method======================================================================
+1. Map
+    Error in map:
+    What is the error?
+        let mapArr = myArr.map((val) => { val * 10 });        
+        The problem:        
+        You are using curly braces {} in the arrow function but not returning anything.        
+        👉 When you use {} in an arrow function, you MUST use return.        
+        🔍 What actually happens?
+        (val) => { val * 10 }       
+        This is interpreted as:        
+        (val) => {
+          val * 10;   // expression evaluated
+          // NO return
+        }       
+        So map() receives undefined for each element.        
+        Result:
+        mapArr = [undefined, undefined, undefined, ...]        
+        ✅ Correct Ways (2 Valid Solutions)
+        ✅ Solution 1: Explicit return
+        let mapArr = myArr.map((val) => {
+          return val * 10;
+        });        
+        ✅ Solution 2: Implicit return (Recommended)
+        let mapArr = myArr.map(val => val * 10);        
+        ✔ Clean
+        ✔ Most commonly used        
+        🧠 Rule to Remember (Interview Gold)
+        Arrow Function Type	Return Needed
+        {} block body	return required
+        No {} (expression body)	auto return
 
+2.filter()
+    let even = nums.filter(n => n % 2 === 0);
+
+3. reduce
+    array.reduce(callbackFn, initialValue);
+    callbackFn (Required): A function executed on each element in the array. It takes up to four arguments:
+    accumulator: The value resulting from the previous call to the callback function. On the first call, 
+    if an initialValue is provided, its value will be the initialValue; otherwise, it will be the first element of the array.
+    currentValue: The value of the current element being processed.
+    currentIndex (Optional): The index of the current element.
+    array (Optional): The original array reduce() was called upon.
+    initialValue (Optional): A value to initialize the accumulator with. Providing an initial value is generally
+    recommended to avoid potential errors with empty arrays and for clarity. 
+        The reduce() method iterates through the array from left to right. In each iteration, the callbackFn is executed, 
+    and its return value becomes the accumulator for the next iteration. The process continues until all elements have been
+    processed, and the final value of the accumulator is returned as the single result. The original array is not modified. 
+    Common Use Cases and Examples
+    The versatility of reduce() makes it useful for various tasks: 
+    Summing Numbers: The most common use case is to sum all the numbers in an array.
+    javascript
+    const numbers = [10, 20, 30, 40, 50];
+    const sum = numbers.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    
+    console.log(sum); // Output: 150
+    Flattening an Array of Arrays: Combining a nested array into a single-dimensional array.
+    javascript
+    const nestedArray = [[1, 2], [3, 4], [5, 6]];
+    const flattenedArray = nestedArray.reduce((accumulator, currentValue) => accumulator.concat(currentValue), []);
+    
+    console.log(flattenedArray); // Output: [1, 2, 3, 4, 5, 6]
+    Counting Occurrences (Tallying): Creating an object that counts the frequency of items in an array.
+    javascript
+    const fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple'];
+    const count = fruits.reduce((accumulator, fruit) => {
+      accumulator[fruit] = (accumulator[fruit] || 0) + 1;
+      return accumulator;
+    }, {});
+    
+    console.log(count); // Output: { apple: 3, banana: 2, orange: 1 }
+    Transforming an Array of Objects: Summarizing or transforming data from an array of objects into a single object or value.
+    javascript
+    const products = [
+      { name: 'Shirt', price: 20 },
+      { name: 'Shoes', price: 50 },
+      { name: 'Hat', price: 15 }
+    ];
+    const totalAmount = products.reduce((accumulator, product) => accumulator + product.price, 0);
+    
+    console.log(totalAmount); // Output: 85
 ======================================================Async calls/ build build method======================================================
 
