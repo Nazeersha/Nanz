@@ -763,7 +763,8 @@ Negative Start	str.slice(-7)	    "Morning"	            str.substring(-7)	    "Go
 Start > End	    str.slice(9, 5)	     "" (empty string)	    str.substring(9, 5)	    "Morn" (arguments swapped to 5, 9)
 
 The includes() :
-    method in JavaScript is a built-in function used to determine whether an array or a string contains a specified value or substring, respectively. It is a case-sensitive method that returns a boolean value (true or false). 
+    method in JavaScript is a built-in function used to determine whether an array or a string contains a specified value or substring, respectively. 
+    It is a case-sensitive method that returns a boolean value (true or false). 
     How to Use includes()
     The method takes one required parameter (the value to search for) and one optional parameter (the position to start the search from). 
     For Arrays
@@ -925,6 +926,7 @@ Seal vs Freeze (Object Protection)
     👉 To fully freeze → deep freeze
 
 ========================================================Array Method======================================================================
+            ===========================1. Non-Mutating Methods (Safe)=============================
 1. Map
     Error in map:
     What is the error?
@@ -1005,5 +1007,39 @@ Seal vs Freeze (Object Protection)
     const totalAmount = products.reduce((accumulator, product) => accumulator + product.price, 0);
     
     console.log(totalAmount); // Output: 85
+
+4. find()	The value of the first match	When you need the item itself
+5. findIndex()	The index of the first match	When you need the position (returns -1 if not found)
+6. filter()	An array of all matches	When you want every item that meets the condition
+7. some()	A boolean (true/false)	When you only need to know if at least one match exists - Use some() when you want to test a condition 
+    (e.g., "is any number less than 2?").
+8. findLast()	The value of the last match	When you need the last occurrence (available in modern JS)
+9. findLastIndex()	The index of the Last match	When you need the position (returns -1 if not found)
+10. Use includes() when you want to find a specific value (e.g., test.includes(1) would return true).
+11. slice()
+    slice() works on both arrays and strings with the same syntax and behavior: 
+    Syntax: arr.slice(startIndex, endIndex)
+    startIndex (optional): The zero-based index at which to start extraction. If omitted, it defaults to 0. Negative indices count from the end of the array/string.
+    endIndex (optional): The zero-based index before which to end extraction (the element at this index is not included). If omitted, extraction continues to the end of the sequence. Negative indices count from the end.
+    Return Value: A new array or string containing the extracted elements. 
+
+find() returns the actual element (the value) that first satisfies the condition. If no match is found, it returns undefined.
+some() returns a boolean (true or false). It only tells you if at least one element matches the condition; it does not give you the element itself. 
+
+===========================================2. Mutating Methods (Be Careful ⚠)========================================================
+1. push()
+    nums.push(4);
+2. pop()
+    nums.pop();
+3. shift() / unshift()
+    nums.shift();
+    nums.unshift(0);
+Method 	    Operation	                End of Array	Return Value	                Performance (Time Complexity)
+push()	    Adds one or more elements	End	            The new array length	        Fast (O(1) - constant time)
+pop()	    Removes one  element	    End	            The removed element	            Fast (O(1) - constant time)
+unshift()	Adds one or more elements	Beginning	    The new array length	        Slow (O(n) - linear time)
+shift()	    Removes one element        	Beginning	    The removed element	            Slow (O(n) - linear time)
+
+
 ======================================================Async calls/ build build method======================================================
 
