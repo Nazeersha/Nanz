@@ -661,6 +661,18 @@ Compared by value
     ✔ Set by developer
     ✔ Used to reset or clear a value
 
+| Type      | Category  | typeof      |
+| --------- | --------- | ----------- |
+| Number    | Primitive | "number"    |
+| String    | Primitive | "string"    |
+| Boolean   | Primitive | "boolean"   |
+| Undefined | Primitive | "undefined" |
+| Null      | Primitive | "object" ❗  |
+| Symbol    | Primitive | "symbol"    |
+| BigInt    | Primitive | "bigint"    |
+| Object    | Reference | "object"    |
+| Array     | Reference | "object"    |
+| Function  | Reference | "function"  |
 
 ==================================================falsy/truthy===================================
 Truthy and Falsy values
@@ -697,7 +709,58 @@ if (" ") console.log("run");    // ✅
 if ([]) console.log("run");     // ✅
 
 =====================================================String Method=========================================================================
+String Methods (Primitive → Object temporarily)
+Important concept first
+let name = "Nazeer";
+"Nazeer" is a primitive string
 
+But strings have methods like .toUpperCase()
+❓ How?
+👉 JavaScript temporarily wraps the string inside a String object (this is called boxing).
+
+Example 1: toUpperCase()
+    let name = "Nazeer";
+    let result = name.toUpperCase();
+    console.log(result); // "NAZEER"
+    
+    Step-by-step execution
+    name stored in stack → "Nazeer"
+    JS sees .toUpperCase()
+    Creates temporary String object in heap
+    Executes method
+    Returns new string
+    Temporary object is destroyed
+    ✔ Original string is not modified (strings are immutable)
+
+Example 2: slice()
+    let text = "JavaScript";
+    let part = text.slice(0, 4);
+    console.log(part); // "Java"
+    Steps:
+    slice(start, end) -> start index inclusing, 0 position include, end - exclusive , before the end position take the char
+    Extracts characters
+    Returns a new string
+    🧠 Memory
+    text  → "JavaScript"
+    part  → "Java"
+
+Example 3: replace()
+    let msg = "Hello World";
+    let newMsg = msg.replace("World", "Nazeer");
+    console.log(newMsg); // "Hello Nazeer"
+    
+    ❗ Original string unchanged
+
+Example 4: split()
+    let sentence = "Angular is powerful";
+    let words = sentence.split(" ");    
+    console.log(words);
+    // ["Angular", "is", "powerful"]
+    ✔ Converts string → array
+
+Description 	slice()             Example	Result	        substring()             Example	 Result
+Negative Start	str.slice(-7)	    "Morning"	            str.substring(-7)	    "Good Morning" (treated as 0)
+Start > End	    str.slice(9, 5)	     "" (empty string)	    str.substring(9, 5)	    "Morn" (arguments swapped to 5, 9)
 
 =====================================================Array and object Method==============================================================
 
