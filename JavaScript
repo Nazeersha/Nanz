@@ -1019,8 +1019,10 @@ Seal vs Freeze (Object Protection)
 11. slice()
     slice() works on both arrays and strings with the same syntax and behavior: 
     Syntax: arr.slice(startIndex, endIndex)
-    startIndex (optional): The zero-based index at which to start extraction. If omitted, it defaults to 0. Negative indices count from the end of the array/string.
-    endIndex (optional): The zero-based index before which to end extraction (the element at this index is not included). If omitted, extraction continues to the end of the sequence. Negative indices count from the end.
+    startIndex (optional): The zero-based index at which to start extraction. If omitted, it defaults to 0. Negative indices count from the end of the 
+array/string.
+    endIndex (optional): The zero-based index before which to end extraction (the element at this index is not included). If omitted, extraction continues 
+to the end of the sequence. Negative indices count from the end.
     Return Value: A new array or string containing the extracted elements. 
 
 find() returns the actual element (the value) that first satisfies the condition. If no match is found, it returns undefined.
@@ -1040,6 +1042,29 @@ pop()	    Removes one  element	    End	            The removed element	         
 unshift()	Adds one or more elements	Beginning	    The new array length	        Slow (O(n) - linear time)
 shift()	    Removes one element        	Beginning	    The removed element	            Slow (O(n) - linear time)
 
+4. splice
+    splice() method: Modify Array Content 
+    The splice() method is a versatile, mutating method that changes the contents of an array by removing, replacing, or adding elements in place. 
+    Syntax: array.splice(startIndex, deleteCount, item1, item2, ...)
+    Action: It modifies the original array directly.
+    Returns: An array containing the elements that were removed (or an empty array if none were removed).
+
+5. sort
+    Why the Comparison Function is Necessary By default, the .sort() method converts elements into strings and compares 
+    their UTF-16 code unit values. Without the function: An array like [1, 10, 2] would stay [1, 10, 2] because "10" comes before "2" alphabetically.
+    The compare function (a, b) => a - b forces the method to treat the elements as numbers. 
+    How the Logic Works The compare function takes two elements at a time (let's call them a and b) and looks at the result of the 
+    subtraction: 
+    Negative Result (\(a-b<0\)): a is smaller than b. The algorithm places a before b.
+    Positive Result (\(a-b>0\)): a is larger than b. The algorithm places a after b.
+    Zero Result (\(a-b=0\)): The values are equal; their relative positions remain unchanged. 
+    Step-by-Step Execution Given numbers = [5, 2, 8, 1, 9]:
+    Compare 5 and 2: \(5-2=3\) (Positive). Swap them \(\rightarrow \) [2, 5, 8, 1, 9]
+    Compare 5 and 8: \(5-8=-3\) (Negative). Keep order.
+    Compare 8 and 1: \(8-1=7\) (Positive). Swap them \(\rightarrow \) [2, 5, 1, 8, 9]
+    The algorithm continues these internal comparisons until the entire array is [1, 2, 5, 8, 9]. 
+    Key Considerations In-place Mutation: The original numbers array is permanently changed.
+    Descending Order: To sort from largest to smallest, you simply reverse the logic: numbers.sort((a, b) => b - a). 
 
 ======================================================Async calls/ build build method======================================================
 
