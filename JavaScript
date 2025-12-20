@@ -628,7 +628,73 @@ add(1, "2");    // string
 ❌ Avoided by JIT
 
 ======================================================datatypes==============================================================================
+JavaScript Data Types
+JavaScript has 8 data types, divided into:
+Primitive (Value types)
+Non-Primitive (Reference types)
 
+Primitive:
+Primitive Data Types (7)
+Stored by value
+Immutable
+Compared by value
+
+1. Number
+2. String
+3.Boolean
+4. undefined
+    🔹 undefined
+    A variable exists, but no value has been assigned yet
+    How it happens
+    Variable declared but not initialized
+    Function with no return
+    Missing object property
+    let a;
+    console.log(a); // undefined
+    function test() {}
+    console.log(test()); // undefined
+    const obj = {};
+    console.log(obj.name); // undefined
+5.null
+    Intentional absence of value
+    let user = null;
+    ✔ Set by developer
+    ✔ Used to reset or clear a value
+
+
+==================================================falsy/truthy===================================
+Truthy and Falsy values
+🔹 What does truthy / falsy mean?
+When a value is used in a boolean context (if, while, &&, ||), JS converts it to true or false.
+❌ Falsy values (ONLY 7)
+Memorize this list 👇
+false
+0
+-0
+0n
+""
+null
+undefined
+NaN
+
+Example:
+if (null) {
+  console.log("Runs");
+} else {
+  console.log("Falsy");
+}
+// Falsy
+✅ Truthy values (EVERYTHING ELSE)
+"0"
+"false"
+[]
+{}
+function(){}
+
+Examples:
+if ("") console.log("run");     // ❌
+if (" ") console.log("run");    // ✅
+if ([]) console.log("run");     // ✅
 
 =====================================================String Method=========================================================================
 
