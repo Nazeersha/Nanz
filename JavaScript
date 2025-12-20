@@ -310,3 +310,321 @@ Optimization	        TurboFan (JIT Compiler)
 Ignition only executes bytecode
 
 =======================================================================================================================================
+The interpreter (Ignition) generates bytecode and starts executing it.
+While executing, V8 profiles the code. If some code becomes hot (frequently executed, like loops or repeated function calls), it is sent to the JIT compiler (TurboFan).
+TurboFan compiles that bytecode into optimized machine code, which is then executed directly by the CPU, bypassing the interpreter for that part of the code.
+
+================================================Memory===================================================================================
+Correct mental model
+
+Stack memory → stores execution data
+Heap memory → stores objects (data structures)
+
+Primitive vs non-primitive is related, but not the real rule.
+🧠 What Stack Memory actually stores
+Stack is managed by V8, fast, LIFO.
+Stack stores:
+
+Execution Contexts (call frames)
+Local variables
+Primitive values
+References (pointers) to heap objects
+Example 1️⃣ – Primitive values
+let a = 10;
+let b = a;
+b = 20;
+Memory:
+Stack:
+a = 10
+b = 20
+
+✔ Primitives are copied by value
+✔ No heap involved
+
+Example 2️⃣ – Objects (Non-primitive)
+let user = {
+  name: "Nazeer",
+  age: 25
+};
+Memory:
+Stack:
+user → 0x1001   (reference)
+Heap:
+0x1001 → { name: "Nazeer", age: 25 }
+
+✔ Variable stores reference
+✔ Actual object lives in heap
+
+Example 3️⃣ – Object mutation
+let user1 = { role: "Dev" };
+let user2 = user1;
+
+user2.role = "Lead";
+
+Memory:
+Stack:
+user1 → 0x2001
+user2 → 0x2001
+
+Heap:
+0x2001 → { role: "Lead" }
+
+
+✔ Both point to same heap object
+✔ Mutation affects both
+
+🧠 What Heap Memory stores
+Heap is:
+Large
+Dynamic
+Slower than stack
+Cleaned by Garbage Collector
+
+Heap stores:
+Objects
+Arrays
+Functions
+Closures
+
+DOM objects
+Large data structures
+Example 4️⃣ – Function & closure
+function outer() {
+  let count = 0;
+
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const fn = outer();
+fn();
+Memory:
+Stack:
+fn → 0x3001
+Heap:
+0x3001 → inner function
+Environment → { count: 1 }
+
+
+✔ outer() stack frame is gone
+✔ count still exists in heap
+✔ GC does NOT clean it because referenced
+⏳ Async tasks – IMPORTANT clarification
+❌ Async tasks are NOT stored in stack or heap by V8
+
+Reality:
+Async APIs are handled by Browser / Node runtime
+Callback references are stored in heap
+Execution happens later via call stack
+Example 5️⃣ – setTimeout
+setTimeout(() => {
+  console.log("Hello");
+}, 1000);
+
+Memory flow:
+Heap:
+0x4001 → callback function
+Browser:
+Timer running...
+Callback Queue:
+0x4001
+Call Stack (later):
+→ callback()
+
+✔ Callback function is in heap
+✔ Queue is NOT heap or stack
+✔ Stack is used only when executing callback
+
+Example 6️⃣ – Promise
+Promise.resolve("OK").then(res => {
+  console.log(res);
+});
+
+Memory:
+Heap:
+Promise object
+.then callback
+Microtask Queue (runtime):
+callback reference
+Call Stack:
+executes later
+
+========================================================================================================================
+Interpreter and compiled (JIT)
+
+Ignition (Interpreter)
+
+AST → Bytecode
+
+Starts executing bytecode immediately
+
+Collects runtime feedback
+
+Types
+
+Call frequency
+
+Loop counts
+
+Example:
+
+function add(a, b) {
+  return a + b;
+}
+
+for (let i = 0; i < 100000; i++) {
+  add(1, 2);
+}
+
+
+add() becomes hot
+
+3️⃣ TurboFan (JIT Compiler)
+
+Receives hot bytecode + profiling data
+
+Generates optimized machine code
+
+Assumes stable types (a and b are numbers)
+
+4️⃣ Optimized Execution
+Interpreter ❌
+Machine Code ✅ → CPU
+
+
+CPU runs machine code directly
+
+Much faster than bytecode
+
+5️⃣ De-optimization (VERY IMPORTANT)
+
+If assumptions break:
+
+add(1, "2"); // type changed
+
+
+TurboFan’s assumptions fail
+
+V8 de-optimizes
+
+Falls back to interpreter
+
+Machine Code ❌
+Interpreter ✅
+
+🔁 Execution flow (visual)
+JS Code
+  ↓
+Parser (AST)
+  ↓
+Ignition (Bytecode)
+  ↓
+[Profiler detects hot code]
+  ↓
+TurboFan (Machine Code)
+  ↓
+CPU executes directly
+
+🔥 Key clarifications (exam gold)
+Statement	Correct?
+Interpreter executes bytecode line by line	✅
+Hot code sent to JIT	✅
+JIT converts bytecode to machine code	✅
+Machine code executed by CPU	✅
+Interpreter still executes hot code	❌
+Machine code sends result to interpreter	❌
+
+===========================================Hot code=========================================================================
+How V8 detects hot code
+
+While Ignition (interpreter) executes bytecode, it records feedback:
+
+Function call count
+
+Loop back-edge count
+
+Type stability (number + number)
+
+Object shape consistency
+
+When thresholds are crossed → hot
+
+✅ What counts as hot code (with examples)
+1️⃣ Repeated function calls ✅ (HOT)
+function sum(a, b) {
+  return a + b;
+}
+
+for (let i = 0; i < 100000; i++) {
+  sum(1, 2);
+}
+
+
+✔ sum() becomes hot
+✔ TurboFan optimizes it
+
+2️⃣ Loops (VERY HOT) ✅
+for (let i = 0; i < 1_000_000; i++) {
+  total += i;
+}
+
+
+✔ Loop back-edge executed many times
+✔ JIT aggressively optimizes loops
+
+3️⃣ Frequently executed callbacks ✅
+setInterval(() => {
+  processData();
+}, 10);
+
+
+✔ Callback runs repeatedly
+✔ processData() becomes hot
+
+❗ Not because it’s a callback
+✔ Because it runs often
+
+4️⃣ Event handlers that fire often ✅
+window.addEventListener('mousemove', handler);
+
+
+✔ handler becomes hot
+✔ Optimized for speed
+
+5️⃣ Promise .then() handlers ⚠️ (sometimes hot)
+fetchData().then(process);
+
+
+Single execution → ❌ not hot
+
+Inside loop / repeated API → ✅ hot
+
+❌ What is NOT hot code
+1️⃣ Code executed once ❌
+initApp();
+
+
+✔ No repetition → no optimization
+
+2️⃣ Rare error paths ❌
+if (error) handleError();
+
+
+✔ Cold path → not optimized
+
+3️⃣ Unstable code ❌
+function add(x, y) {
+  return x + y;
+}
+
+add(1, 2);      // number
+add(1, "2");    // string
+
+
+❌ Types change
+❌ De-optimized repeatedly
+❌ Avoided by JIT
+
+=======================================================================================================================================
