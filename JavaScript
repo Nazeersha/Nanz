@@ -1066,5 +1066,45 @@ shift()	    Removes one element        	Beginning	    The removed element	      
     Key Considerations In-place Mutation: The original numbers array is permanently changed.
     Descending Order: To sort from largest to smallest, you simply reverse the logic: numbers.sort((a, b) => b - a). 
 
+=======================================================Search Methods==========================================
+The every() method is a JavaScript array tool that checks if all elements in an array pass a specific test. It returns a Boolean value (true or false). 
+
+| Method        | Returns |
+| ------------- | ------- |
+| `indexOf()`   | index   |
+| `find()`      | element |
+| `findIndex()` | index   |
+| `some()`      | boolean |
+| `every()`     | boolean |
+
+
+=========================================================flat and conbine array method=======================
+The flat() method is used to simplify nested arrays (arrays within arrays) into a single-level array. 
+Default Behavior: It flattens the array by one level.
+Depth Parameter: You can specify how many levels to flatten. Use Infinity to flatten all levels regardless of how deep they are.
+Cleanup: It automatically removes empty slots (holes) in sparse arrays. 
+javascript
+const nested = [1, [2, 3], [[4, 5]]];
+
+console.log(nested.flat());      // [1, 2, 3, [4, 5]] (Level 1 default)
+console.log(nested.flat(2));     // [1, 2, 3, 4, 5] (Level 2)
+console.log(nested.flat(Infinity)); // [1, 2, 3, 4, 5] (All levels)
+
+concat()
+let newArr = nums.concat([4, 5]);
+=========================================================================================================================
+5. Iteration Only
+forEach()
+nums.forEach(n => console.log(n));
+
+| Category  | Methods                 |
+| --------- | ----------------------- |
+| Transform | map, reduce             |
+| Filter    | filter                  |
+| Search    | find, some, every       |
+| Mutate    | push, pop, splice, sort |
+| Safe Copy | slice, spread           |
+| Iterate   | forEach                 |
+
 ======================================================Async calls/ build build method======================================================
 
