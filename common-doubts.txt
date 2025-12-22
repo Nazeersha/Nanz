@@ -20,11 +20,9 @@ What #box means
 In Angular, #box is called a template reference variable.
 
 #box creates a reference to that input element inside the template
-
 It points to the DOM element (HTMLInputElement)
-
 You can use it only in the same template (HTML file)
-
+  
 What happens behind the scenes
 
 Think of this like pure JavaScript:
@@ -1320,3 +1318,4 @@ Unnecessary module dependencies
 
 ===================================================================================
 fromEvent needs a real  DOM element right, so in rxjs -> fromEvent - its an observable operator for dom event will be placed inside ngAfterviewInit
+
