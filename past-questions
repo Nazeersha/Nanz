@@ -1,0 +1,111 @@
+-------------------from seema---------------------
+1.have you implemented caching
+
+2. how do you handle production issues, if app is not working for few users or application has become heavy after prod deployment
+
+3.authentication and authorization
+
+4.login and logout
+
+5.diff auth guards
+
+6.Find out unique substring of given length of string.
+
+EX:
+
+Input - (aab,2) , Output - aa, ab
+
+Input- (aabc,2), Output - aa, ab,bc
+
+Input -(abc,1), Output - a,b,c
+
+-------------let output=function(s,k){
+
+    let result=[]
+
+    let seen=new Set()
+
+    for(let i=0;i<=s.length-k; i++){
+
+    const temp=s.slice(i, i+k);
+
+    if(!seen.has(temp)){
+
+    seen.add(temp)
+
+    result.push(temp)
+
+    }
+
+    }
+
+return result
+
+}
+
+console.log(output('abcd',2))---------------
+
+----------------------------------------------------------------------------
+
+7.angular upgradation
+
+8.how do you debug the app
+
+-----------------------------------------------------------------------
+
+scenario based ques:Angular -
+
+1 . How to check Responsiveness before deploying or demo before Production
+
+2. Authguard - CanActivate
+
+3. How do we use Guard at Angular what is the real use case of it?
+
+4. ngOnInit - useCases?
+
+5. Different ways to handle state management in Angular
+
+6. Angular Signals
+
+7. Lifecycle hooks
+
+8. Interface used in ngOnChanges
+
+9. Difference btw promises & Observables , Subjects and Behaviors?
+
+10. If a Live update is on Stock market which one you will use Promise or Observables
+
+11. CSS & SCSS
+
+12. Current/Previous Project Explanation
+
+13. Component communication - sibling & parent-child
+
+14. Logic for custom date formatting pipe
+
+15. Lazy loading
+
+16. How to implement validations in reactive forms?
+
+17. Which life cycle hook to be used in a scenario where, logic needs to be executed every time data sent from parent to child changes?
+
+18. For a search bar implementation, to stop previous api call and start new call of the same api, on typing each letter, which RXJS operator to be used?
+
+19. For a submit button implementation, to revent any further api calls of the same api, till the first call completes, which RXJS operator to be used?
+
+20. If a service is injected into 4 components, variable in that service to be used in all components, what type of variable to be used? Observable or Subject?
+
+21. Different ways of DI?
+
+22. What is Ngnx? How we can perform load balancing?
+
+23. create custom pipe with examples?
+
+24. dispatch method, how it is working?
+
+25. How to update the entire row in AG Grid when a textbox inside a cell is clicked or changed
+ 
+these are few questions that i have
+ 
+which in many interviews they are asking
+ 
