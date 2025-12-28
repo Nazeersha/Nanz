@@ -1,4 +1,17 @@
+======================================================================================================
 Interview trick question ⚠️
 “HttpClient supports progress, so it supports streaming, right?”
 Correct answer:
 “No. HttpClient reports download progress but still buffers the entire response. Streaming requires access to the response body as a stream, which is only available via Fetch API or native streams.”
+====================================================================================================
+Can HttpClient be used AT ALL in your POC?
+✅ YES — but for a DIFFERENT use case
+Valid HttpClient use cases:
+File download with progress bar
+Save to disk after full download
+Small/medium files (<10MB)
+❌ Not suitable for:
+Huge files (100MB+)
+Progressive rendering
+Page-on-demand PDF viewing
+==================================================================================================================
