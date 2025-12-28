@@ -1,0 +1,4 @@
+Interview trick question ⚠️
+“HttpClient supports progress, so it supports streaming, right?”
+Correct answer:
+“No. HttpClient reports download progress but still buffers the entire response. Streaming requires access to the response body as a stream, which is only available via Fetch API or native streams.”
