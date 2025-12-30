@@ -44,39 +44,121 @@ Types of:
    └──── minIntegerDigits = 1
 
 percentage
-{{ 0.25 | percent }}
-➡ 25%
+  {{ 0.25 | percent }}
+  ➡ 25%
 
 currency
-{{ 1500 | currency:'INR':'symbol' }}
-➡ ₹1,500.00
-{{ 1500 | currency:'USD':'symbol' }}
-➡ $1,500.00
+  {{ 1500 | currency:'INR':'symbol' }}
+  ➡ ₹1,500.00
+  {{ 1500 | currency:'USD':'symbol' }}
+  ➡ $1,500.00
 
 date pipe
-{{ today | date:'dd-MM-yyyy' }}
-today = new Date();
-Common formats:
-Format	    Output
-short	      1/1/25, 3:00 PM
-mediumDate	Jan 1, 2025
-longDate	  January 1, 2025
-dd/MM/yyyy	01/01/2025
+  {{ today | date:'dd-MM-yyyy' }}
+  today = new Date();
+  Common formats:
+  Format	    Output
+  short	      1/1/25, 3:00 PM
+  mediumDate	Jan 1, 2025
+  longDate	  January 1, 2025
+  dd/MM/yyyy	01/01/2025
 
 JSON Pipe
-Very useful for debugging 👌
-<pre>{{ user | json }}</pre>
-user = { name: 'Nazeer', role: 'Angular Dev' };
-➡
-{
-  "name": "Nazeer",
-  "role": "Angular Dev"
-}
+  Very useful for debugging 👌
+  <pre>{{ user | json }}</pre>
+  user = { name: 'Nazeer', role: 'Angular Dev' };
+  ➡
+  {
+    "name": "Nazeer",
+    "role": "Angular Dev"
+  }
 
 Slice Pipe
-Works like Array.slice() or String.slice()
-{{ 'Angular' | slice:0:3 }}
-➡ Ang
-{{ users | slice:0:2 }}
+  Works like Array.slice() or String.slice()
+  {{ 'Angular' | slice:0:3 }}
+  ➡ Ang
+  {{ users | slice:0:2 }}
 
-  
+6. Async Pipe (VERY IMPORTANT ⭐)
+  Used with:
+  ✔ Observables
+  ✔ Promises
+  {{ users$ | async }}
+  Behind the scenes:
+  Subscribes automatically
+  Updates UI on emission
+  Unsubscribes automatically
+  ➡ Prevents memory leaks
+
+🔹 7. KeyValue Pipe
+  Used for objects
+  <div *ngFor="let item of user | keyvalue">
+    {{ item.key }} : {{ item.value }}
+  </div>
+
+================================================================================================================
+Almost all predefined Angular pipes are pure pipes.
+Only AsyncPipe behaves like an impure pipe (but internally optimized).
+
+1️⃣ What does pure vs impure mean?
+✅ Pure Pipe
+  Executes only when input reference changes
+  Very performance friendly
+  Default behavior in Angular
+  @Pipe({ name: 'myPipe', pure: true }) // default
+
+❌ Impure Pipe
+  Executes on every change detection cycle
+  Can be expensive
+  Must be explicitly marked
+  @Pipe({ name: 'myPipe', pure: false })
+=========================================================================================================================
+Creating a Custom Pipe (Pure Pipe)
+
+Example: Capitalize First Letter
+ng generate pipe capitalize
+@Pipe({
+  name: 'capitalize'
+})
+export class CapitalizePipe implements PipeTransform {
+
+  transform(value: string): string {
+    if (!value) return value;
+    return value.charAt(0).toUpperCase() + value.slice(1);
+  }
+}
+
+Usage
+{{ 'angular' | capitalize }}
+➡ Angular
+
+7️⃣ Custom Pipe with Arguments
+transform(value: string, limit: number): string {
+  return value.slice(0, limit);
+}
+{{ 'AngularDeveloper' | custom:7 }}
+➡ Angular
+
+8️⃣ Impure Custom Pipe Example (NOT Recommended)
+@Pipe({
+  name: 'filterUsers',
+  pure: false
+})
+export class FilterUsersPipe implements PipeTransform {
+
+  transform(users: string[], search: string): string[] {
+    return users.filter(u => u.includes(search));
+  }
+}
+⚠️ This runs on every keystroke / CD cycle
+✔ Prefer filtering in component or using signals/RxJS
+
+9️⃣ Pipes vs Methods in Template (Interview Question)
+❌ Method in template:
+{{ getTotal() }}
+Runs every CD cycle
+✔ Pipe:
+{{ total | calculate }}
+Runs only when input changes
+
+
