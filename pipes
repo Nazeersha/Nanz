@@ -1,1 +1,82 @@
 ==========================================pipes=====================================================================================
+Pipe = a function that transforms data for display in the template
+👉 Pipes do NOT change the original data
+👉 They are used only in templates
+👉 Syntax uses the pipe operator |
+
+Simple example
+<p>{{ userName | uppercase }}</p>
+userName = 'nazeer';
+Output
+NAZEER
+✔ Original userName is still 'nazeer'
+
+============================================================================================================================
+Why Pipes Exist?
+Without pipes:
+<p>{{ userName.toUpperCase() }}</p>
+Problems:
+❌ Logic inside template
+❌ Hard to reuse
+❌ Poor readability
+❌ Difficult to test
+✔ Pipes solve this by separating transformation logic
+=================================================================================================================
+Types of:
+1. String pipes
+  uppercase
+  {{ 'angular' | uppercase }}
+  lowercase
+  {{ 'ANGULAR' | lowercase }}
+  titlecase
+  {{ 'angular developer' | titlecase }}
+  ➡ Angular Developer
+
+2.Number pipes
+  number 
+  {{ 12345.6789 | number:'1.2-2' }}
+  ➡ 12,345.68
+  '1.2-2'
+   ↑ ↑ ↑
+   | | |
+   | | └─ maxFractionDigits = 2
+   | └── minFractionDigits = 2
+   └──── minIntegerDigits = 1
+
+percentage
+{{ 0.25 | percent }}
+➡ 25%
+
+currency
+{{ 1500 | currency:'INR':'symbol' }}
+➡ ₹1,500.00
+{{ 1500 | currency:'USD':'symbol' }}
+➡ $1,500.00
+
+date pipe
+{{ today | date:'dd-MM-yyyy' }}
+today = new Date();
+Common formats:
+Format	    Output
+short	      1/1/25, 3:00 PM
+mediumDate	Jan 1, 2025
+longDate	  January 1, 2025
+dd/MM/yyyy	01/01/2025
+
+JSON Pipe
+Very useful for debugging 👌
+<pre>{{ user | json }}</pre>
+user = { name: 'Nazeer', role: 'Angular Dev' };
+➡
+{
+  "name": "Nazeer",
+  "role": "Angular Dev"
+}
+
+Slice Pipe
+Works like Array.slice() or String.slice()
+{{ 'Angular' | slice:0:3 }}
+➡ Ang
+{{ users | slice:0:2 }}
+
+  
