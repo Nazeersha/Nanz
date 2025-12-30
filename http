@@ -2,7 +2,8 @@
 Interview trick question ⚠️
 “HttpClient supports progress, so it supports streaming, right?”
 Correct answer:
-“No. HttpClient reports download progress but still buffers the entire response. Streaming requires access to the response body as a stream, which is only available via Fetch API or native streams.”
+“No. HttpClient reports download progress but still buffers the entire response. Streaming requires access to the response body as a stream, 
+which is only available via Fetch API or native streams.”
 ====================================================================================================
 Can HttpClient be used AT ALL in your POC?
 ✅ YES — but for a DIFFERENT use case
@@ -15,3 +16,69 @@ Huge files (100MB+)
 Progressive rendering
 Page-on-demand PDF viewing
 ==================================================================================================================
+subscribe({
+      next: event => {
+        if (event.type === HttpEventType.DownloadProgress) {
+          if (event.total) {
+            this.progress = Math.round(
+              (event.loaded / event.total) * 100
+            );
+          }
+        }
+
+
+this.http.get('http://localhost:3000/pdf', {
+  responseType: 'blob',
+  observe: 'events',
+  reportProgress: true
+})
+
+
+| Option                 | Why                                 |
+| ---------------------- | ----------------------------------- |
+| `responseType: 'blob'` | PDF is binary data                  |
+| `observe: 'events'`    | Emit multiple HTTP lifecycle events |
+| `reportProgress: true` | Enable progress events              |
+
+event -> if we have reportProgress: true in http header
+{
+  type: 3,
+  loaded: 5242880,
+  total: 104857600
+}
+
+What happens if you remove these options?
+❌ Remove observe: 'events'
+  this.http.get(url)
+  Result:
+  Only ONE emission
+  No progress
+  event becomes the response body
+  .subscribe(blob => { ... })
+
+❌ Remove reportProgress: true
+  observe: 'events'
+  Result:
+  You still get events
+  ❌ But NO DownloadProgress
+  Only Sent and Response
+
+❌ Remove responseType: 'blob'
+Angular assumes JSON:
+responseType: 'json' (default)
+Result:
+❌ Error:
+Unexpected token % in JSON
+Because PDF is binary
+
+
+| Config                 | Effect                   |
+| ---------------------- | ------------------------ |
+| `observe: 'events'`    | Enables lifecycle events |
+| `reportProgress: true` | Enables progress events  |
+| `responseType: 'blob'` | Correct binary handling  |
+
+
+All three together are required for progress tracking.
+
+===============================================================================================================================
