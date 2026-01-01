@@ -1,1 +1,19 @@
 ===========================================Memory and perfomance====================================================
+if we are just going to create only one instance / we have add method using this inside function , 
+if we are going for multiple instances, we have to create method using prototypical way.
+protypical way will share the method across all the objects.
+addign method using this keyword -? it will create uniques memory for each and every instances.
+
+If we create only one instance, adding methods using this inside a constructor function is okay.
+
+If we create multiple instances, defining methods on the prototype is better because
+➜ the method is shared across all instances.
+
+Adding methods using this inside the constructor
+➜ creates a new function in memory for every instance ❌ memory inefficient.
+
+✔️ This is 100% correct after this clarification.
+
+https://chatgpt.com/c/69565203-4c3c-8321-bc4a-60f904236cdc
+
+===========================================================================================================================
