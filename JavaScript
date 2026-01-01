@@ -1503,4 +1503,67 @@ Used internally in frameworks & libraries.
       }, 1000);
     }
 
-========================================================================================================================================
+=============================================================Prototype===========================================================================
+  Prototype:
+    What is prototype (in simple words)    
+    Prototype is a shared object from which other objects inherit properties and methods.    
+    Instead of copying methods into every object, JavaScript links objects together.    
+    Think like this:    
+    Objects don’t copy methods — they point to them. protype chaining 
+
+    Objects don’t copy behavior — they delegate behavior through prototype chains.
+
+     Factory Function (Flexible)
+        A standard function that explicitly returns an object. It does not use the new keyword. It is excellent for encapsulation (private variables) using closures.
+        function createUser(name) {
+          // 'secret' is private; it can't be accessed from outside the object
+          const secret = 'TOP_SECRET'; 
+        
+          return {
+            name,
+            sayHi() {
+              console.log(`Hi, I'm ${name}. My secret is ${secret}`);
+            }
+          };
+        }
+        
+        const user3 = createUser('Charlie');
+        user3.sayHi(); // "Hi, I'm Charlie. My secret is TOP_SECRET"
+        console.log(user3.secret); // undefined
+
+    Constructor Function (Legacy)
+        A regular function that acts as a blueprint. It also uses this and requires new. Methods are usually added to the .prototype to save memory.
+        javascript
+        function User(name) {
+          this.name = name;
+        }
+        
+        User.prototype.sayHi = function() {
+          console.log(`Hi, I'm ${this.name}`);
+        };
+        
+        const user2 = new User('Bob');
+        user2.sayHi(); // "Hi, I'm Bob"
+
+    The "Why" Behind the Split
+    this -> (Instance Specific): Properties like name or age are unique to each person. If you put them on the prototype, 
+    every instance would share the exact same value. If you changed it for one, it could unintentionally change for everyone.
+    
+    prototype -> (Shared Behavior): Methods like sayHi() perform the same logic for everyone. Defining them on the prototype
+    saves memory because all objects reference one single function in memory rather than each having its own identical copy. 
+
+Important: if you are not attching the method inside constrctor it will become a global -> window 
+
+    function User(name) {
+      this.name = name;
+      // Missing 'this.' or 'let'
+      sayHi = function() { 
+        console.log(`Hi, I'm ${this.name}`); 
+      };
+    }
+    
+    const user1 = new User("Alice");
+    console.log(user1.sayHi); // undefined (it's not on the object)
+    window.sayHi();           // "Hi, I'm undefined" (it's on the window)
+========================================================================================================================================================
+
