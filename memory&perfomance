@@ -9,7 +9,7 @@ If we create only one instance, adding methods using this inside a constructor f
 If we create multiple instances, defining methods on the prototype is better because
 ➜ the method is shared across all instances.
 
-Adding methods using this inside the constructor
+Adding methods using 'this' inside the constructor
 ➜ creates a new function in memory for every instance ❌ memory inefficient.
 
 ✔️ This is 100% correct after this clarification.
