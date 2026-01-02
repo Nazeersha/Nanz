@@ -23,6 +23,22 @@ before executing the code , the engine will do below actions
   function foo()	-> Memory created, full function stored
   let / const	-> Memory created but kept uninitialized
 
+    var a = 10;
+    var obj = { x: 1 };
+    function foo() {}
+    markdown
+    Copy code
+    STACK (Execution Context)
+    ------------------------
+    a   → 10
+    obj → 0x123
+    foo → 0x456
+    
+    HEAP
+    ------------------------
+    0x123 → { x: 1 }
+    0x456 → function foo() {...}
+
 This is what we call hoisting.
 ✅ Nothing is moved physically to the top
 ❌ This is a misconception
@@ -42,6 +58,15 @@ During this memory creation phase, function declarations are fully initialized, 
 After memory creation, the code is executed line by line.
 
 =============================================================================================================================
+ var is global or function-scoped, not block-scoped, global will go to window object, inside funcction it will go to that function execution context
+✔ It goes to the nearest function or global variable environment
+
+| Keyword | Scope             | Stored in            |
+| ------- | ----------------- | -------------------- |
+| var     | Function / Global | Variable Environment |
+| let     | Block             | Lexical Environment  |
+| const   | Block             | Lexical Environment  |
+
 
 Parsing:
 Parsing = converting raw JavaScript text into a structure the engine can understand
@@ -75,6 +100,18 @@ NUMBER(10)
 No memory
 No execution
 Only understanding grammar
+
+Source Code
+   ↓
+Tokenization (Lexer)
+   ↓
+Abstract Syntax Tree (Parser)
+   ↓
+Execution Context Creation (Hoisting)
+   ↓
+Interpreter / JIT Execution
+
+
 ======================================================================================================================================
 var - functional or gloabal scope, so stored in variable environment / but let and const having block scope so they are gettign store in lexical environment 
 
