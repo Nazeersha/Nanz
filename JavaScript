@@ -221,6 +221,46 @@ A closure keeps variables alive by retaining a reference to its lexical environm
 Memory is released when the function becomes unreachable.
 Improper use of closures—especially with event listeners or subscriptions—can cause memory leaks.
 
+closure - function that accessing the lexical environment 
+it can be inner function assigned to outer variable.
+    function outer() {
+      let count = 0;
+    
+      return function inner() {
+        count++;
+        console.log(count);
+      };
+    }
+    
+    const fn = outer();
+    fn(); // 1
+    fn(); // 2
+
+it can be a setTImeout function
+    function outer() {
+      let name = "JS";
+    
+      setTimeout(function () {
+        console.log(name);
+      }, 1000);
+    }    
+    outer();
+
+it can be a event listerner 
+    function attachHandler() {
+      let count = 0;
+    
+      document.addEventListener("click", function () {
+        count++;
+        console.log(count);
+      });
+    }
+    attachHandler();
+inside loop:
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 1000);
+}
+
 ===============================================================================================================================================================================
 Garbage collection happens automatically in JavaScript. Unlike low-level languages such as C or C++ where developers must manually allocate and free memory, 
 JavaScript engines handle memory management behind the scenes. 
@@ -459,6 +499,9 @@ Example 5️⃣ – setTimeout
 setTimeout(() => {
   console.log("Hello");
 }, 1000);
+
+IMP: Web APIs push completed async callbacks into the task queues (callback queues), not directly into the call stack.
+👉 The Event Loop then moves them from the queue to the Call Stack.
 
 Memory flow:
 Heap:
