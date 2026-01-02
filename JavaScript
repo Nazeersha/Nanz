@@ -1604,3 +1604,82 @@ Important: if you are not attching the method inside constrctor it will become a
     window.sayHi();           // "Hi, I'm undefined" (it's on the window)
 ========================================================================================================================================================
 
+┌───────────────────────────────────────────────────────────┐
+│                    JavaScript Source Code                  │
+│   (ES6+, functions, classes, async, closures, modules)     │
+└───────────────┬───────────────────────────────────────────┘
+                │
+                ▼
+┌───────────────────────────────────────────────────────────┐
+│                  PARSING / COMPILATION                     │
+│                                                           │
+│  1. Tokenization (Lexer)                                  │
+│     - keywords, identifiers, operators                    │
+│                                                           │
+│  2. Parsing                                               │
+│     - Syntax validation                                   │
+│     - AST (Abstract Syntax Tree)                           │
+│                                                           │
+│  3. Scope Analysis                                        │
+│     - Scope chain                                         │
+│     - Lexical bindings (let/const)                         │
+│     - Hoisting plan                                       │
+└───────────────┬───────────────────────────────────────────┘
+                │
+                ▼
+┌───────────────────────────────────────────────────────────┐
+│         EXECUTION CONTEXT CREATION (Hoisting Phase)        │
+│                                                           │
+│  Global Execution Context                                  │
+│  ├─ Variable Environment (var, function)                  │
+│  ├─ Lexical Environment (let, const)                      │
+│  ├─ Scope Chain                                           │
+│  └─ this binding                                          │
+│                                                           │
+│  Memory Allocation:                                       │
+│  - Stack → primitives, references                         │
+│  - Heap  → objects, functions, closures                   │
+└───────────────┬───────────────────────────────────────────┘
+                │
+                ▼
+┌───────────────────────────────────────────────────────────┐
+│              EXECUTION PHASE (Interpreter)                 │
+│                                                           │
+│  - Code runs line-by-line                                  │
+│  - Function calls create new execution contexts            │
+│  - Lexical environments created for blocks                │
+│                                                           │
+│  CALL STACK                                               │
+│  ┌─────────────┐                                         │
+│  │ Function EC │                                         │
+│  ├─────────────┤                                         │
+│  │ Global EC   │                                         │
+│  └─────────────┘                                         │
+└───────────────┬───────────────────────────────────────────┘
+                │
+                ▼
+┌───────────────────────────────────────────────────────────┐
+│                ASYNCHRONOUS RUNTIME                        │
+│                                                           │
+│  Web APIs (Browser / Node)                                 │
+│  - setTimeout                                             │
+│  - DOM Events                                             │
+│  - fetch / HTTP                                           │
+│                                                           │
+│  Callback Queue (Macro Tasks)                              │
+│  Microtask Queue (Promises, async/await)                  │
+│                                                           │
+│  EVENT LOOP                                               │
+│  - Checks Call Stack                                      │
+│  - Pushes tasks when stack is empty                       │
+└───────────────┬───────────────────────────────────────────┘
+                │
+                ▼
+┌───────────────────────────────────────────────────────────┐
+│               MEMORY MANAGEMENT & GC                       │
+│                                                           │
+│  - Stack cleanup                                          │
+│  - Heap objects retained via closures                     │
+│  - Mark & Sweep GC                                       │
+│  - Memory leaks (listeners, closures)                     │
+└───────────────────────────────────────────────────────────┘
