@@ -1,6 +1,37 @@
-NGRX:
+NGRX: Angular specific statement solution that will allow us to create cient side database with our data.
+it will reduce the no of api calls, allow reflecting data immediatly.
+
+no component can change the state directly, so changes can be traceable - ngrx devtool
+
 its a state management library for angular 
-	NgRx is a framework designed specifically for building reactive applications in Angular and is not a general-purpose library for other frameworks like React or Vue. Its libraries are deeply integrated with Angular's ecosystem, including its dependency injection system, RxJS, and the Angular Router.
+NgRx is a framework designed specifically for building reactive applications in Angular and is not a general-purpose library for other frameworks like React or Vue. Its libraries are deeply integrated with Angular's ecosystem, including its dependency injection system, RxJS, and the Angular Router.
+it help to remember and manage the data across the component in structured and predictable way
 
-	it help to remember and manage the data across the component in structured and predictable way
+=================================================================================================================
 
+Action:
+Action can be create in all components and dispatch, but there maybe a possible way of creating multiple action for same action
+
+so create action file seperatly , add all action there , and use that action in component for dispatch
+
+ex: in login component :
+this.store.dispatch({
+	type: "Login Action",
+	payload: {
+		userProfile: user
+	}
+});
+
+inline action -> if action added inline instead of creating sepertly will cause the multiple issue :
+
+ex: 
+this.store.dispatch({
+	type : '[auth] login',
+	payload: { user: user }
+})
+
+if other component giving wrong name by mistake , reducer wil not run and silently breal , without error.
+also if u are chaning action name in one place we have to modify all places
+
+===============================================================================================
+Reducer: will react when action are dispatched, and will do the calculation to generate the new version d state.
