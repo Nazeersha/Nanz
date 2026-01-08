@@ -1,0 +1,28 @@
+===================================some question and answer============================
+1.What are directives, custom directives with explanation 
+  Directives in Angular are classes that extend the behavior of DOM elements.
+  Angular mainly has two types of directives:  
+  1. Structural Directives
+  These modify the DOM structure by adding or removing elements.
+  Examples include *ngIf, *ngFor, and *ngSwitch.  
+  2. Attribute Directives
+  These change the appearance or behavior of existing elements without changing the DOM structure.
+  Examples include ngClass, ngStyle, and custom attribute directives.  
+  Components are a special type of directive that include a template and styles, and Angular applications
+  are primarily component-based.  
+  Angular also allows creating custom structural and attribute directives to encapsulate reusable DOM behavior.
+
+  @Input and @Output are used for component communication, not directives.Directives in 
+  Angular are classes that extend the behavior of DOM elements.  
+  Angular mainly has two types of directives:  
+  1. Structural Directives
+  These modify the DOM structure by adding or removing elements.
+  Examples include *ngIf, *ngFor, and *ngSwitch.  
+  2. Attribute Directives
+  These change the appearance or behavior of existing elements without changing the DOM structure.
+  Examples include ngClass, ngStyle, and custom attribute directives.  
+  Components are a special type of directive that include a template and styles, and Angular applications
+  are primarily component-based.  
+  Angular also allows creating custom structural and attribute directives to encapsulate reusable DOM behavior.  
+  @Input and @Output are used for component communication, not directives.
+=====================================================================================================================
