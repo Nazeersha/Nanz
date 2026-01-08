@@ -1,6 +1,6 @@
-===================================some question and answer============================
+===========1.What are directives, custom directives with explanation ============================
 1.What are directives, custom directives with explanation 
-  Directives in Angular are classes that extend the behavior of DOM elements.
+  Directives in Angular is a instruction to the dom, that will change the structure / behavior or appearence of the element.
   Angular mainly has two types of directives:  
   1. Structural Directives
   These modify the DOM structure by adding or removing elements.
@@ -12,17 +12,135 @@
   are primarily component-based.  
   Angular also allows creating custom structural and attribute directives to encapsulate reusable DOM behavior.
 
-  @Input and @Output are used for component communication, not directives.Directives in 
-  Angular are classes that extend the behavior of DOM elements.  
-  Angular mainly has two types of directives:  
-  1. Structural Directives
-  These modify the DOM structure by adding or removing elements.
-  Examples include *ngIf, *ngFor, and *ngSwitch.  
-  2. Attribute Directives
-  These change the appearance or behavior of existing elements without changing the DOM structure.
-  Examples include ngClass, ngStyle, and custom attribute directives.  
-  Components are a special type of directive that include a template and styles, and Angular applications
-  are primarily component-based.  
-  Angular also allows creating custom structural and attribute directives to encapsulate reusable DOM behavior.  
-  @Input and @Output are used for component communication, not directives.
-=====================================================================================================================
+angular providing the predefined structural and attribute directives to handle most of the scenarions / real time uses.
+but still we can also create custome directive 
+
+EX: 2 type of code as per below statement: IMPORT
+ElementRef is preferred for directives because it provides a stable reference to the host element and aligns 
+with Angular’s component and directive lifecycle. $event.target is event-driven and may change depending on event 
+bubbling, making it less predictable. Performance differences are negligible; correctness and maintainability 
+matter more.
+Attribute directive:
+  @Directive({
+    selector: '[appHighlight]'
+  })
+  export class HighlightDirective {
+  
+    constructor(private el: ElementRef) {}
+  
+    @HostListener('focus')
+    onFocus() {
+      this.el.nativeElement.style.background = 'yellow';
+    }
+  
+    @HostListener('blur')
+    onBlur() {
+      this.el.nativeElement.style.background = '';
+    }
+  }
+  
+  working ex: 
+  import { Directive, HostListener } from '@angular/core';
+  
+  @Directive({
+    selector: '[appAttrColorDirective]',
+    standalone: true
+  })
+  export class AttrColorDirectiveDirective {
+  
+    constructor() { }
+  
+    @HostListener('focus', ['$event'])
+    onFocus(event: FocusEvent) {
+      const target = event.target as HTMLElement | null;
+      if (target) {
+        target.style.backgroundColor = 'yellow';
+      }
+    }
+  
+  }  
+  Usage:  
+  <input appHighlight />    
+  ✅ Reusable
+  ✅ Clean templates
+  ✅ No copy-paste JS
+
+✅ Custom Structural Directive (example)
+👉 Use case:
+👉 Show element only if role is ADMIN
+@Directive({
+  selector: '[appHasRole]'
+})
+export class HasRoleDirective {
+  constructor(
+    private tpl: TemplateRef<any>,
+    private vcr: ViewContainerRef
+  ) {}
+
+  @Input()
+  set appHasRole(role: string) {
+    if (role === 'ADMIN') {
+      this.vcr.createEmbeddedView(this.tpl);
+    } else {
+      this.vcr.clear();
+    }
+  }
+}
+when custom directives 
+TemplateRef decides WHAT to render, ViewContainerRef decides WHERE & WHEN to render.
+1️⃣ What Angular sees in your template
+<div *appHasRole="'ADMIN'">Admin Panel</div>
+Angular NEVER keeps this as-is.
+✅ Angular rewrites it internally to:
+<ng-template [appHasRole]="'ADMIN'">
+  <div>Admin Panel</div>
+</ng-template>
+
+🔴 Important facts:
+<ng-template> is NOT rendered
+It’s just a container for future rendering
+
+2️⃣ TemplateRef — “WHAT can be rendered”
+constructor(
+  private tpl: TemplateRef<any>,
+  private vcr: ViewContainerRef
+) {}
+🧩 TemplateRef (tpl)
+Think of this as:
+📄 Blueprint / HTML recipe
+It contains:
+<div>Admin Panel</div>
+✅ Not in DOM
+✅ Just stored in memory
+✅ Cannot render itself
+
+3️⃣ ViewContainerRef — “WHERE it goes”
+🧩 ViewContainerRef (vcr)
+Think of this as:
+📍 Anchor point in the DOM
+It knows:
+Where to insert the view
+Where to remove it from
+
+4️⃣ The magic line 🚀
+this.vcr.createEmbeddedView(this.tpl);
+What happens step-by-step:
+Angular takes TemplateRef
+Creates a View instance (copy of template)
+Inserts it into DOM at vcr location
+✅ Element appears
+✅ Change detection starts
+✅ Child components initialize
+
+5️⃣ Removing from DOM (clean & safe)
+this.vcr.clear();
+This does:
+Removes DOM nodes
+Destroys components
+Executes lifecycle cleanup
+✅ No memory leaks
+✅ No dangling listeners
+This is why Angular doesn’t want you to do:
+element.remove()
+====================================================================================================================
+
