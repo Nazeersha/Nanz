@@ -35,3 +35,4 @@ also if u are chaning action name in one place we have to modify all places
 
 ===============================================================================================
 Reducer: will react when action are dispatched, and will do the calculation to generate the new version d state.
+
