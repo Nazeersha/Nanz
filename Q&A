@@ -142,5 +142,10 @@ Executes lifecycle cleanup
 ✅ No dangling listeners
 This is why Angular doesn’t want you to do:
 element.remove()
-====================================================================================================================
+============================================2. Decorator and type of decorator==================================================================
+A decorator is a function that adds metadata to a class, method, property, or parameter without changing its actual code.
+Angular uses decorators to store metadata, and later Angular reads that metadata at runtime to decide how to create, connect, and manage objects.
+
+
+
 
