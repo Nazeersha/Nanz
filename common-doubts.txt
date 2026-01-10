@@ -1319,3 +1319,85 @@ Unnecessary module dependencies
 ===================================================================================
 fromEvent needs a real  DOM element right, so in rxjs -> fromEvent - its an observable operator for dom event will be placed inside ngAfterviewInit
 
+==================================================renderer2==================================================================================
+Why Angular doesn’t want direct DOM access
+Direct DOM access:
+Works only in browsers
+Breaks Server-Side Rendering (Angular Universal)
+Breaks Web Workers
+Harder to test
+Can cause security issues (XSS)
+Angular was designed to run in multiple environments.
+📌 So Angular created Renderer.
+
+What does Renderer actually do?
+Think of Renderer as a translator:
+Your code
+   ↓
+Renderer API
+   ↓
+Platform-specific DOM (browser / server / native)
+So your code stays the same, but Angular adapts the implementation.
+4️⃣ Renderer vs Renderer2
+Renderer ❌ (deprecated)
+Renderer2 ✅ (current, safe, stable)
+Always use Renderer2.
+5️⃣ Common Renderer2 operations (most used)
+constructor(
+  private el: ElementRef,
+  private renderer: Renderer2
+) {}
+
+🔹 Change styles
+this.renderer.setStyle(this.el.nativeElement, 'color', 'blue');
+this.renderer.removeStyle(this.el.nativeElement, 'color');
+🔹 Add / remove class
+this.renderer.addClass(this.el.nativeElement, 'active');
+this.renderer.removeClass(this.el.nativeElement, 'active');
+🔹 Set / remove attributes
+this.renderer.setAttribute(this.el.nativeElement, 'title', 'Hello');
+this.renderer.removeAttribute(this.el.nativeElement, 'title');
+🔹 Set properties
+this.renderer.setProperty(this.el.nativeElement, 'value', 'Angular');
+🔹 Listen to events
+this.renderer.listen(this.el.nativeElement, 'click', () => {
+  console.log('Clicked');
+});
+📌 listen() automatically handles cleanup on destroy.
+6️⃣ Renderer + Directive = perfect match
+That’s why you mostly see Renderer inside directives, not components.
+Example directive:
+@Directive({
+  selector: '[appHighlight]'
+})
+export class HighlightDirective {
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) {
+    this.renderer.setStyle(this.el.nativeElement, 'background', 'yellow');
+  }
+}
+Why?
+Directive modifies host element
+Renderer keeps it safe and platform-independent
+7️⃣ Why not use Renderer in components much?
+You can, but usually don’t need to.
+Components:
+Control their own template
+Use bindings: [class.active], [style.color]
+Prefer Angular template syntax
+Directive:
+Has no template
+Must manipulate existing DOM → Renderer is ideal
+
+| ElementRef               | Renderer2            |
+| ------------------------ | -------------------- |
+| Gives raw DOM element    | Safe DOM API         |
+| Platform dependent       | Platform independent |
+| Can cause XSS            | Angular sanitizes    |
+| Should be used carefully | Recommended          |
+
+
+===============================================================================================================================
+
