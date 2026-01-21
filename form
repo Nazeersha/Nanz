@@ -1,0 +1,20 @@
+=======================form========================
+Form is nothing but the container or structire where we can collect the user inputs, track the value, 
+validity , whether it is touched or dirty. reacte to the value change, and submit the date. 
+instead of capturing individual fields and values, from will wrap the html fileds and read the DOM values and validate
+
+basically we can do this via 2 ways.
+1. template driven form
+2. reactive form.
+
+1. Template driven form :
+  is nornal form, where all logics and validation will take place in template.
+  uses ngModel
+  change detection will be heavy 
+
+2.Reactive form:
+  in reactive form, all our logics and validation will be in ts file,  so template will be just reflecting the values.
+  in reactive form.
+
+Advantages:
+
