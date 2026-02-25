@@ -1752,5 +1752,76 @@ ex: log(0 ?? 5) //0,  log("" ?? "hello") // "", log(null ?? 10) //10, log(undefi
 
 https://chatgpt.com/share/699ea286-9414-800e-949d-9ee98fd9fa7a
 
+Tricky JavaScript Comparison Questions
+
+These are interview favourites.
+
+❓1
+console.log(null == undefined);
+
+✅ true
+Because loose equality treats them equal.
+
+❓2
+console.log(null === undefined);
+
+❌ false
+Strict equality checks type also.
+
+❓3
+console.log([] == false);
+
+😈 true (very tricky)
+
+Why?
+
+[] → "" → 0
+false → 0
+0 == 0 → true
+❓4
+console.log("" == 0);
+
+✅ true
+
+Because:
+
+"" → 0
+0 == 0
+❓5
+console.log("5" - 2);
+
+✅ 3
+Because - forces number conversion.
+
+❓6
+console.log("5" + 2);
+
+✅ "52"
+Because + with string → concatenation.
+
+❓7
+console.log(undefined == 0);
+
+❌ false
+undefined only equals null.
+
+❓8
+console.log(undefined > 0);
+
+❌ false
+Because undefined → NaN → comparison false.
+
+❓9
+console.log(NaN == NaN);
+
+❌ false
+NaN is not equal to anything (even itself).
+
+❓10
+console.log(typeof null);
+
+😈 "object"
+(This is a historical JS bug.)
+
 ========================================================================================================
 
