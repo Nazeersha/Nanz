@@ -1,0 +1,58 @@
+Big O notation:
+	-> fast
+	-> Less memory intensive
+	-> More Readable
+
+	time complexity: how much time taking, in n grows
+		O(1), O(n), O(n^2)
+
+	space complexity: memory increase if n grows , just see the allocation based on input increase
+
+	To analyze the performance of an algorithm, we use Big O Notation
+	Big O Notation can give us a high level understanding of the time or space complexity of an algorithm
+	Big O Notation doesn't care about precision, only about general trends (linear? quadratic? constant?)
+	The time or space complexity (as measured by Big O) depends only on the algorithm, not the hardware	used to run the algorithm 
+	Big O Notation is everywhere, so get lots of practice!
+
+==============================================================================================================================
+Algorithm :
+	A process or set of steps to accomplish a certain task.
+
+Problem:
+	take a string input and count the each char in the string
+
+	problem solving tech:
+	1. understand the problem
+	2. explore the example of problem
+	3. break down
+	4. solve / simplyfy
+	5. refector
+	
+	charCount("aaa") -> {a:3}
+	charCount("hello hi") -> {h:2,e:1,l:2,o:1,i:1}
+	
+	charCount(str) {
+		// create object
+		// loop over string
+			//if char apart from albhanumaric
+				//ignore
+			// else char is albha numeric
+				// if check if thar char is availble in object as key then just increment
+				// else add key and update val as 1			
+		// return resultObj;
+		
+		let result = {};
+		for(let i=0; i<str.length; i++) {
+			let char = str[i];
+			if(result[char] > 0) {
+				result[char]++;
+			} else {
+				result[char] = 1;
+			}
+		}
+		return result;
+	}
+
+=====================================================================================
+
+	
