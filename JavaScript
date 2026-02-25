@@ -1726,3 +1726,31 @@ Important: if you are not attching the method inside constrctor it will become a
 │  - Mark & Sweep GC                                       │
 │  - Memory leaks (listeners, closures)                     │
 └───────────────────────────────────────────────────────────┘
+
+=======================================================================================================
+obj = {};
+if(obj["char"] > 0)
+
+obj["char"] => undefined means , javascript will convert this to NaN , so comparition with any is false, 
+thats y undefined > 0 will return false
+
+we can check like this obj[char] = (obj[char] || 0) + 1;
+or 
+obj[char] = (obj[char] ?? 0) + 1 
+
+?? -> it will only check null and undefined
+
+or || -> if the return right side if left side os falsy
+
+falsy -> false, 0 , "", null, undefined, NaN
+
+ex: log(0 || 5) //5,  log("" || "hello") -// hello, log(null || 10) //10
+
+nullish Coalescing:
+return right side only if left side is null or undefined.
+ex: log(0 ?? 5) //0,  log("" ?? "hello") // "", log(null ?? 10) //10, log(undefined ?? 9) // 9
+
+https://chatgpt.com/share/699ea286-9414-800e-949d-9ee98fd9fa7a
+
+========================================================================================================
+
