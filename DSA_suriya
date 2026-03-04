@@ -1,1 +1,12 @@
 ===============================DSA - COurse===============================
+Time Complexity: used to calculate the run time of algorithm
+algorithm -> process or set of certain task
+computation -> operation 
+  time will be directly proportional to no of computation -> if computation increases time increases
+  convergent -> many to one -> coming closer together
+  divergent -> moving away from each other.
+
+  time complexity can be calculated in 2 ways :
+  1. math way -> Asymptotic 
+  2. Experimental way -> 
+
