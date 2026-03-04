@@ -37,6 +37,13 @@ computation -> operation
    input independent algorithm -> it doent care about inouts -> it will always stright line , 
    so all worst case and best case will be same line -> merge sort
 
+  so the worst case and best case time complexity will be decided not only by experimental point or curve also sweep area.
+  near top to sweep or near bottom to sweep (check image in phone).
+========================================================================================================================
+2. when we calculate exact no of cycle on the cpu -> run time everytime comes under the experimental way
+
+====================================================================================================================
+
 
   
 
