@@ -44,6 +44,38 @@ computation -> operation
 
 ====================================================================================================================
 
+AP Series: Arithmetic progression:
+  Term formula : nth term formula:
+  start value a, common different d, it mab + or negative value
+  t1 = a,
+  t2 = a + d;
+  t3 = a + 2d;
+  tn = a + (n -1)*d
+
+  1............5..............9...............13 
+  a = 1;
+  d = 4;
+  find 3th -> n = 3
+  1 + (3 - 1) * 4 => 9
+  13............9..............5...............1
+  a = 13
+  d = -4
+  find 3rd
+  13 + (3 - 1) * 4 => 13 - 8 => 5
+
+sum formula: 
+N/2 [1st term + last term]
+1st term is a
+last term -> we can use term formaula that is last term -> a+(n-1)*d
+
+so n/2 [a + a+[n-1]*d]
+-> n/2 [2a + [n-1] *d]
+
+time complexity is not based on the order of N in loop, instead submition of computation 
+so time complexity is not based on how may loop we write -> it based on how many operation we will do.
+ex: i=0 -> runs 5 operation
+    i=1 -> run 9 
+    i=2 -> 13 ....
 
   
 
