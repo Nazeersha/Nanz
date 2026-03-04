@@ -10,7 +10,7 @@ computation -> operation
   1. math way -> Asymptotic 
   2. Experimental way -> 
 
-1. Math way :
+1. Math way : (we can check our algorithm with experimental complexity)
   we have big O notation 
   we have big Omega notation 
   we have big teta notation
@@ -23,5 +23,13 @@ if computation increases timing increases.
 calculation of run time should be with large no of inputs and divergent curve
 divergent : one to many -> convergent -> many to one curve
 
-worst case time complexity:
-1. check closure divergent with large no of numbers
+worst case time complexity: tightest upper bond -> big O notation
+1. check closest to the head and divergent with large no of numbers
+
+best case time complexity: tightest lower bond -> big Omega Notation
+1. check the closest floor and divergent with large no of numbers.
+
+Avarage case time complexity -> big teta notation
+
+
+
