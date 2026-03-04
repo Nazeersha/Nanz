@@ -10,3 +10,18 @@ computation -> operation
   1. math way -> Asymptotic 
   2. Experimental way -> 
 
+1. Math way :
+  we have big O notation 
+  we have big Omega notation 
+  we have big teta notation
+
+so basically in graph , we have x axis -> no of inputs
+y - axis -> no of computation / timing
+meaning computation -> operation by cpu -> so timing is directly proportional to computation 
+if computation increases timing increases.
+
+calculation of run time should be with large no of inputs and divergent curve
+divergent : one to many -> convergent -> many to one curve
+
+worst case time complexity:
+1. check closure divergent with large no of numbers
