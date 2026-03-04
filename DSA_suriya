@@ -15,21 +15,30 @@ computation -> operation
   we have big Omega notation 
   we have big teta notation
 
-so basically in graph , we have x axis -> no of inputs
-y - axis -> no of computation / timing
-meaning computation -> operation by cpu -> so timing is directly proportional to computation 
-if computation increases timing increases.
+  so basically in graph , we have x axis -> no of inputs
+  y - axis -> no of computation / timing
+  meaning computation -> operation by cpu -> so timing is directly proportional to computation 
+  if computation increases timing increases.
+  
+  calculation of run time should be with large no of inputs and divergent curve
+  divergent : one to many -> convergent -> many to one curve
+  
+  worst case time complexity: tightest upper bond -> big O notation
+  1. check closest to the head and divergent with large no of numbers
+  
+  best case time complexity: tightest lower bond -> big Omega Notation
+  1. check the closest floor and divergent with large no of numbers.
+  
+  Avarage case time complexity -> big teta notation 
+    sum of everythign / 2 will not work here, because worst and best cases will not have correct result , 
+    the sweep area between is vary 
+    Ex:
+   inputs dependent algorithm -> based on the nature of inputs the time will very -> bubble sort
+   input independent algorithm -> it doent care about inouts -> it will always stright line , 
+   so all worst case and best case will be same line -> merge sort
 
-calculation of run time should be with large no of inputs and divergent curve
-divergent : one to many -> convergent -> many to one curve
 
-worst case time complexity: tightest upper bond -> big O notation
-1. check closest to the head and divergent with large no of numbers
-
-best case time complexity: tightest lower bond -> big Omega Notation
-1. check the closest floor and divergent with large no of numbers.
-
-Avarage case time complexity -> big teta notation
+  
 
 
 
