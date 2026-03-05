@@ -45,6 +45,8 @@ computation -> operation
 
 AP Series: Arithmetic progression: based on addiotion and substraction -> D - difference -> check ap-series.png
 
+  note: sum of natual sum formula: n(n+1)/2
+
   Components:
   a: first term
   d: difference
@@ -169,13 +171,13 @@ i = 1,2,3,4 ..........k
 s = 3,6,10 ......k(k+1)/2
 so s value is lesser tehn or equal n
 k(k+1) / 2 = n
-k2 + k = 2n
+k^2 + k = 2n
 
 when checking big O notation, all lower polinomiul will be ignore, hightest order will be taken and all constant ignore
 
-so O(k^2) = o(n)
+so O(k^2) = O(n)
 O(k) -> k is primary if we want to keep k in O notation 
-so O(k) = O(Square of n) 
+so O(k) = O(root of n) 
 =========================================================================================================
 
 
