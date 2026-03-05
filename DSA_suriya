@@ -41,13 +41,12 @@ computation -> operation
   near top to sweep or near bottom to sweep (check image in phone).
 ========================================================================================================================
 2. when we calculate exact no of cycle on the cpu -> run time everytime comes under the experimental way
-
 ====================================================================================================================
 
-AP Series: Arithmetic progression:
+AP Series: Arithmetic progression: based on addiotion and substraction -> D - difference 
   Components:
   a: first term
-  r: common ratio
+  d: difference
   n: Number of term
   Tn: nth Term
   sn: sum of n term
@@ -84,7 +83,7 @@ ex: i=0 -> runs 5 operation
     i=2 -> 13 ....
 
 ===============================================================================================================
-GP series: Geometric pregression
+GP series: Geometric pregression - its based on ratio -> working over devidenet and multiplications
 Components:
 a: first term
 r: common ratio
@@ -92,7 +91,7 @@ n: Number of term
 Tn: nth Term
 sn: sum of n term
 
-  
+
 
 
 
