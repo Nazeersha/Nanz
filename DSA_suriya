@@ -45,6 +45,12 @@ computation -> operation
 ====================================================================================================================
 
 AP Series: Arithmetic progression:
+  Components:
+  a: first term
+  r: common ratio
+  n: Number of term
+  Tn: nth Term
+  sn: sum of n term
   Term formula : nth term formula:
   start value a, common different d, it mab + or negative value
   t1 = a,
@@ -76,6 +82,15 @@ so time complexity is not based on how may loop we write -> it based on how many
 ex: i=0 -> runs 5 operation
     i=1 -> run 9 
     i=2 -> 13 ....
+
+===============================================================================================================
+GP series: Geometric pregression
+Components:
+a: first term
+r: common ratio
+n: Number of term
+Tn: nth Term
+sn: sum of n term
 
   
 
