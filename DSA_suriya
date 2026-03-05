@@ -38,12 +38,13 @@ computation -> operation
    so all worst case and best case will be same line -> merge sort
 
   so the worst case and best case time complexity will be decided not only by experimental point or curve also sweep area.
-  near top to sweep or near bottom to sweep (check image in phone).
+  near top to sweep or near bottom to sweep (check image in phone) or  check the png in git - curve.png
 ========================================================================================================================
 2. when we calculate exact no of cycle on the cpu -> run time everytime comes under the experimental way
 ====================================================================================================================
 
-AP Series: Arithmetic progression: based on addiotion and substraction -> D - difference 
+AP Series: Arithmetic progression: based on addiotion and substraction -> D - difference -> check ap-series.png
+
   Components:
   a: first term
   d: difference
@@ -84,12 +85,52 @@ ex: i=0 -> runs 5 operation
 
 ===============================================================================================================
 GP series: Geometric pregression - its based on ratio -> working over devidenet and multiplications
+A geometric progression is a sequence where each term is multiplied by a fixed number called common ration
+
 Components:
 a: first term
 r: common ratio
 n: Number of term
 Tn: nth Term
 sn: sum of n term
+
+general form of GP : a, ar, ar^2, ar^3  ......
+
+nth term : ar^(n-1)
+  ex: 2,6,18,54......
+  find the 5th term
+  a = 2
+  r = 3;
+  n = 5
+  so, 2*3^(5-1) => 2*3^4 => 2*81 => 162
+
+sum of nth term:
+  when r != 1
+  sn = a(r^n -1) / r -1    ==========> r > 1
+  sn = a(1- r^n) / 1 - r   =========== r < 1
+  sn = na =======> r = 1
+  Sinf = a/1-r            ============= infinite will come only if r less then 1
+
+  ex: find the first 4 term:
+  2,6,18,54
+  a = 2;
+  r = 3;
+  n = 4;
+  
+  sn = a(r^n -1) / r - 1 => 2(3^4 -1) / 3 - 1 => 2(81 - 1) / 2 => 2(80)/2 => 80
+
+  Infinite GP Sum:
+  of r < 1 => then infinite sum exists
+  s infinite = a / 1 -r 
+  ex: 1 + 1/2 + 1/4 + 1/8 ...
+  a = 1;
+  r = 1/2;
+  s = 1/ 1 - 1/2 => 1/1/2 => 2
+
+  
+
+
+
 
 
 
