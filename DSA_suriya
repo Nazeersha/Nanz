@@ -131,7 +131,55 @@ Clear explanation of GP
 https://chatgpt.com/share/69a9253b-6480-800e-b3da-dba874636bb7
 
 ======================================================================================================================
-  
+Hp Series:
+  A Harmonic Progression (HP) is a sequence where the reciprocals of the terms form an Arithmetic Progression (AP).
+  In mathematics, the HP series formula (Harmonic Progression) is the reciprocal of an Arithmetic Progression (AP) formula.
+  For a series , the  term is given by: 
+  1/a, 1/a + d, 1/ a+ 2d
+
+=========================================================================================================
+Practice question:
+1. for(i=1; i<=n;i++)
+    print *
+    i=1 => start point
+    n = end point
+    i++ = jump size
+so the time complexity will be like => end - start / js * block operation (print)
+block operation => o(1)
+end = n, start = 1
+O(n - 1)/1 => O(n)
+
+2. for(i=1; i<=n;i++)
+      for(j=1; j<=n;j++)
+      print *
+ i = 1 , j is running from 1 to n and js is 1 
+     each j doing one time iteration n time, for each value of i 
+    O(n2)
+
+3. i=1; s = 1;
+   while(s <=n) {
+    i++;
+    s = s + i;
+    print *
+   }
+
+input n = 5, output => in iteration -> i = 2, s, 3 print -> next iteration -> i = 3; s = 6 print; -> i = 4; s = 10..
+so
+i = 1,2,3,4 ..........k
+s = 3,6,10 ......k(k+1)/2
+so s value is lesser tehn or equal n
+k(k+1) / 2 = n
+k2 + k = 2n
+
+when checking big O notation, all lower polinomiul will be ignore, hightest order will be taken and all constant ignore
+
+so O(k^2) = o(n)
+O(k) -> k is primary if we want to keep k in O notation 
+so O(k) = O(Square of n) 
+=========================================================================================================
+
+
+
 
 
 
