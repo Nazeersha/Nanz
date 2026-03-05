@@ -178,8 +178,42 @@ when checking big O notation, all lower polinomiul will be ignore, hightest orde
 so O(k^2) = O(n)
 O(k) -> k is primary if we want to keep k in O notation 
 so O(k) = O(root of n) 
-=========================================================================================================
 
+4. for(i=1; i^2 <=n; i++)
+      print
+i = 1, 1<n
+i = 2, 4<n
+i = 3, 9<n
+i = 4, 16<n
+i = .......k
+condition is based on k^2 = n
+O(k^2) = O(n)
+O(k) = O(Sroot of n)
+
+5. 
+for(i=1;i<=n;i++)
+  for(j=1;j<=i;j++)
+    for(k=1;k<100;k++)
+      print;
+
+i .........n  O(n)
+j..........n^2 O(n)
+k..........100 O(1)
+
+O(n)*O(n) => O(n2)
+
+6. for(i=1;i<=n;i++)
+     for(j=1;j<=i^2;j++)
+      for(k=1;k<=n/2;k++)
+        print;
+
+i .........n  O(n)
+j..........n^2 O(n2)
+k..........n/2 O(n/2)
+
+O(n)*O(n^2)*O(n/2) = O(n^3)
+
+======================================================================================================
 
 
 
