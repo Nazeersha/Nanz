@@ -213,6 +213,48 @@ k..........n/2 O(n)
 
 O(n)*O(n^2)*O(n) = O(n^4)
 
+7:
+for(i=1;i<n;i=i*2)
+i => 1 , i -> 2 , 4, 8, 16
+so i ......2^k = n
+bring k -> k common i mean k is principle 
+
+log2 2^k = log2 N  =>>>>> k = log2(n) ===> O(log n)
+
+explanation:
+2^k = N
+Now you are taking log base 2 on both sides.
+⸻
+Step 1: Apply log₂ to both sides
+\log_2 (2^k) = \log_2 (N)
+⸻
+Step 2: Important Log Rule
+There is a rule:
+\log_a (a^x) = x
+This works because:
+• Log and exponent with same base cancel each other.
+So,
+\log_2 (2^k)
+Since base is 2 and inside also 2, they cancel.
+So it becomes:
+k = \log_2 N
+You have:
+2^k = N
+Now you are taking log base 2 on both sides.
+⸻
+Step 1: Apply log₂ to both sides
+\log_2 (2^k) = \log_2 (N)
+⸻
+Step 2: Important Log Rule
+There is a rule:
+\log_a (a^x) = x
+This works because:
+• Log and exponent with same base cancel each other.
+So,
+\log_2 (2^k)
+Since base is 2 and inside also 2, they cancel.
+So it becomes:
+k = \log_2 N
 ======================================================================================================
 
 
