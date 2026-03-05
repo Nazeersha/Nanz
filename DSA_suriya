@@ -221,6 +221,8 @@ bring k -> k common i mean k is principle
 
 log2 2^k = log2 N  =>>>>> k = log2(n) ===> O(log n)
 
+Log and exponent with same base cancel each other.
+
 explanation:
 2^k = N
 Now you are taking log base 2 on both sides.
@@ -257,6 +259,12 @@ So it becomes:
 k = \log_2 N
 ======================================================================================================
 
+10.  for(i=n/2;i<=n;i++)        O(n)
+     for(j=1;j<=n/2;j++)        O(n)
+      for(k=1;k<=n/2;k = K*2)   O(log n)
+        print;
+
+O(n^2 log n)
 
 
 
