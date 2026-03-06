@@ -15,7 +15,8 @@ computation -> operation
   we have big Omega notation 
   we have big teta notation
 
-  so basically in graph , we have x axis -> no of inputs
+  so basically in graph , we have 
+  x axis -> no of inputs
   y - axis -> no of computation / timing
   meaning computation -> operation by cpu -> so timing is directly proportional to computation 
   if computation increases timing increases.
@@ -27,7 +28,7 @@ computation -> operation
   1. check closest to the head and divergent with large no of numbers
   
   best case time complexity: tightest lower bond -> big Omega Notation
-  1. check the closest floor and divergent with large no of numbers.
+  1. check the closest floor and divergent with large no of inputs.
   
   Avarage case time complexity -> big teta notation 
     sum of everythign / 2 will not work here, because worst and best cases will not have correct result , 
@@ -188,7 +189,7 @@ i = 4, 16<n
 i = .......k
 condition is based on k^2 = n
 O(k^2) = O(n)
-O(k) = O(Sroot of n)
+O(k) = O(root of n)
 =========================================================================================================
 5. 
 for(i=1;i<=n;i++)
