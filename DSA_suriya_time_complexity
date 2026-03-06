@@ -333,9 +333,38 @@ so total => N * log log N
 
 O(N log log N)
 =========================================================================================================
+conversion : online assignments
+goal -> AC -> 1sec
 
+<=10^18 ======> O(log n) === in 10^8 => if its exits then TLE -> time limit Exit
+
+flow N -> root N -> log N -> 1
+N -> 10^18 -> 
+Root N -> 10^9 -> which is still greater then 10^8
+Log N -> 60 operation
+
+learn : remember power of 2 till 1 to 10
+10^3 = 2^10
+10^6 = 2^20
+10^9 = 2^30
+10^12 = 2^40
 
 ============================================================================
+Different types of algorithm we need to apply when we exactly know the representation of the complexity
+<=10^18 -> o(log n)
+<=10^12 -> o(root n)
+<=10^8  -> better then o(n)
+<=10^7  -> o(n)
+<=10^6  -> o(n log n)
+<=10^5  -> o(n root n)
+<=10^4  -> better then o(n^2)
+<=10^3  -> o(N^2 logn)
+<=10^2  -> o(n^3 logn)
+<=25 -> o(2^n)
+<=15 -> o(n.2^n)
+<=10 -> N!
+check image constrains
+====================================================================================================
 
 
 
