@@ -298,7 +298,43 @@ log series -> logN so => n(logn)
 
 
 =========================================================================================
-13. check image
+13. check image 
+N = 2^2^k
+for(i=1;i<=N;i++)
+  j=2;
+  while(j<=N)
+  j = j^2
+  print
+
+Outer loop -> i run N time -> O(n)
+Inner Loop -> j run N time but with jump side j^2
+
+i = 1 -> J = 2
+i = 2 -> J = 2^2 => 4
+i = 3 -> J = 4^2 => 16
+
+so pattern is 2^2^t
+
+t is iteration.
+
+so condition is j<=N ====> 2^2^t = N and N is 2^2^K
+
+so 2^2^t <= 2^2^k ====> t<=k so loops run K times ===> innner look -> O(k)
+
+now we can convert K into N
+2^2^k = N
+log2^k = Log N
+k = Log(Log N)
+K = log log N
+
+oouter loop => N times
+
+so total => N * log log N
+
+O(N log log N)
+=========================================================================================================
+
+
 ============================================================================
 
 
