@@ -22,8 +22,22 @@ base-k ---------------> base-10 ------------------------>base-p
 Base-p -------------->base-10---------------------------> base-k
 *p^1                                                    / k
 
-TC -> time complexity of this base conversion => O(log N).
+TC -> time complexity of this base conversion => O(log N). no of digit is log of N
 
 ====================================================================================================================
+
+2. primility test -> prime number check
+  if there is no divisor from 2 to N-1 is prime number
+  function checkPrime(n) {
+     for(let i = 2; i < n; i++) {
+         if(n%i == 0){
+             return false;
+         };
+     } 
+      return true;       
+}
+
+n = 5;
+checkPrime(n);
 
 
